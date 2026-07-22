@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" role="img" aria-labelledby="title">
+  <title id="title">宽幅矩阵与颜色层级</title>
+  <defs><linearGradient id="legend" x1="0" x2="1"><stop stop-color="#285d7a"/><stop offset=".5" stop-color="#84b8bf"/><stop offset="1" stop-color="#f4d6a1"/></linearGradient></defs>
+  <rect width="1600" height="700" rx="28" fill="#f5f7f7"/>
+  <g font-family="Arial, 'Microsoft YaHei', sans-serif">
+    <text x="74" y="87" fill="#254c61" font-size="42" font-weight="700">注意力矩阵：宽图应仅在自身容器缩放</text>
+    <text x="76" y="126" fill="#66808c" font-size="22">正文基线保持不变，图片在安全区内使用 contain 呈现</text>
+    <g transform="translate(104 190)">
+      <rect width="1130" height="340" rx="10" fill="#fff" stroke="#d1dfe1"/>
+      <g stroke="#fff" stroke-width="4">
+        <rect x="0" y="0" width="140" height="66" fill="#2c6682"/><rect x="142" y="0" width="140" height="66" fill="#4d899c"/><rect x="284" y="0" width="140" height="66" fill="#83b8bd"/><rect x="426" y="0" width="140" height="66" fill="#c0d9c9"/><rect x="568" y="0" width="140" height="66" fill="#f0d7a8"/><rect x="710" y="0" width="140" height="66" fill="#d9a774"/><rect x="852" y="0" width="140" height="66" fill="#9c6a74"/><rect x="994" y="0" width="136" height="66" fill="#694d69"/>
+        <rect x="0" y="68" width="140" height="66" fill="#4c879c"/><rect x="142" y="68" width="140" height="66" fill="#2a5d79"/><rect x="284" y="68" width="140" height="66" fill="#5f99aa"/><rect x="426" y="68" width="140" height="66" fill="#9cc8c5"/><rect x="568" y="68" width="140" height="66" fill="#dce0c0"/><rect x="710" y="68" width="140" height="66" fill="#f2c68e"/><rect x="852" y="68" width="140" height="66" fill="#c88973"/><rect x="994" y="68" width="136" height="66" fill="#845d70"/>
+        <rect x="0" y="136" width="140" height="66" fill="#85b9be"/><rect x="142" y="136" width="140" height="66" fill="#639eae"/><rect x="284" y="136" width="140" height="66" fill="#315f7b"/><rect x="426" y="136" width="140" height="66" fill="#699eab"/><rect x="568" y="136" width="140" height="66" fill="#bad6c9"/><rect x="710" y="136" width="140" height="66" fill="#e8d59d"/><rect x="852" y="136" width="140" height="66" fill="#d79f76"/><rect x="994" y="136" width="136" height="66" fill="#a16e72"/>
+        <rect x="0" y="204" width="140" height="66" fill="#bfd9cf"/><rect x="142" y="204" width="140" height="66" fill="#9bc8c5"/><rect x="284" y="204" width="140" height="66" fill="#6ba1ad"/><rect x="426" y="204" width="140" height="66" fill="#2e607d"/><rect x="568" y="204" width="140" height="66" fill="#6698a5"/><rect x="710" y="204" width="140" height="66" fill="#cdd9af"/><rect x="852" y="204" width="140" height="66" fill="#efd09a"/><rect x="994" y="204" width="136" height="66" fill="#c98d73"/>
+        <rect x="0" y="272" width="140" height="64" fill="#efd9a9"/><rect x="142" y="272" width="140" height="64" fill="#dfe0bd"/><rect x="284" y="272" width="140" height="64" fill="#b9d5c9"/><rect x="426" y="272" width="140" height="64" fill="#6c9eaa"/><rect x="568" y="272" width="140" height="64" fill="#2a5f7c"/><rect x="710" y="272" width="140" height="64" fill="#5f8796"/><rect x="852" y="272" width="140" height="64" fill="#a26f73"/><rect x="994" y="272" width="136" height="64" fill="#694c68"/>
+      </g>
+    </g>
+    <rect x="104" y="590" width="680" height="24" rx="12" fill="url(#legend)"/>
+    <text x="104" y="650" fill="#67808b" font-size="20">低关联</text><text x="690" y="650" fill="#67808b" font-size="20">高关联</text>
+  </g>
+</svg>

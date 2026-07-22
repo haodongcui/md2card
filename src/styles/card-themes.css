@@ -1,0 +1,879 @@
+/*
+ * Export-card design system
+ *
+ * The Markdown geometry lives here as shared, semantic component rules. Theme
+ * classes only provide roles (surface, content, emphasis, outline, shape) and
+ * a small number of deliberate signatures. CardPage and MeasureStage receive
+ * the same classes, so every visual height remains part of pagination.
+ */
+
+.card-page,
+.measure-stage {
+  --theme-surface: #ffffff;
+  --theme-surface-container-low: #fafafa;
+  --theme-surface-container: #f4f4f4;
+  --theme-surface-container-high: #eeeeee;
+  --theme-on-surface: #1f1f1f;
+  --theme-on-surface-variant: #666666;
+  --theme-primary: #303030;
+  --theme-primary-container: #e9e9e9;
+  --theme-on-primary-container: #1f1f1f;
+  --theme-outline: #808080;
+  --theme-outline-variant: #dddddd;
+  --theme-code-surface: #fafafa;
+  --theme-code-toolbar: #f3f3f3;
+  --theme-table-surface: #fafafa;
+  --theme-table-header: #eeeeee;
+  --theme-table-row-odd: #fdfdfd;
+  --theme-table-row-even: #f5f5f5;
+  --theme-table-shadow: none;
+  --theme-math-surface: transparent;
+  --theme-syntax-comment: #757178;
+  --theme-syntax-keyword: #5d5d5d;
+  --theme-syntax-string: #3f755f;
+  --theme-syntax-function: #35677a;
+  --theme-syntax-number: #8a5b25;
+  --shape-technical: 6px;
+  --shape-container: 12px;
+  --shape-cover: 16px;
+  --heading-marker-width: 112px;
+  --heading-marker-height: 4px;
+  --heading-h3-marker-width: 4px;
+  --cover-decoration: transparent;
+  --cover-decoration-border: transparent;
+  --font-code: "JetBrains Mono Variable", "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  color: var(--theme-on-surface);
+  /* Latin glyphs use Times New Roman first; CJK glyphs fall back to the
+   * bundled Noto Sans SC. Code and KaTeX declare their own families below. */
+  font-family: "Times New Roman", "Nimbus Roman No9 L", "Liberation Serif", "Noto Sans SC Variable", "Noto Sans SC", "Microsoft YaHei", serif;
+}
+
+/* Shared reading grammar: hierarchy comes from roles and rhythm, never from a
+ * different decorative device for every Markdown block. */
+.card-page .card-content,
+.measure-stage .card-content {
+  color: var(--theme-on-surface);
+}
+
+.card-page .content-block strong,
+.measure-stage .content-block strong {
+  color: var(--theme-on-surface);
+  font-weight: 780;
+}
+
+.card-page .content-block em,
+.measure-stage .content-block em {
+  color: var(--theme-on-surface-variant);
+}
+
+.card-page .content-block a,
+.measure-stage .content-block a {
+  color: var(--theme-primary);
+  text-decoration-color: var(--theme-primary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .17em;
+}
+
+.card-page .heading,
+.measure-stage .heading {
+  color: var(--theme-on-surface);
+  font-weight: 740;
+  letter-spacing: -.038em;
+}
+
+.card-page .heading.depth-2,
+.measure-stage .heading.depth-2 {
+  position: relative;
+  padding: 0 0 19px;
+  border: 0;
+  font-size: var(--heading-2);
+  line-height: 1.23;
+}
+
+.card-page .heading.depth-2::after,
+.measure-stage .heading.depth-2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: var(--heading-marker-width);
+  height: var(--heading-marker-height);
+  border-radius: var(--heading-marker-radius, 999px);
+  background: var(--theme-primary);
+}
+
+.card-page .heading.depth-3,
+.measure-stage .heading.depth-3 {
+  position: relative;
+  padding-left: 18px;
+  font-size: var(--heading-3);
+  line-height: 1.31;
+}
+
+.card-page .heading.depth-3::before,
+.measure-stage .heading.depth-3::before {
+  content: '';
+  position: absolute;
+  top: .2em;
+  bottom: .2em;
+  left: 0;
+  width: var(--heading-h3-marker-width);
+  border-radius: var(--heading-marker-radius, 999px);
+  background: var(--theme-primary-container);
+}
+
+.card-page .heading.depth-4,
+.card-page .heading.depth-5,
+.card-page .heading.depth-6,
+.measure-stage .heading.depth-4,
+.measure-stage .heading.depth-5,
+.measure-stage .heading.depth-6 {
+  color: var(--theme-on-surface);
+  font-size: 30px;
+  font-weight: 720;
+  line-height: 1.4;
+  letter-spacing: -.02em;
+}
+
+.card-page .inline-code,
+.measure-stage .inline-code {
+  padding: .08em .36em;
+  border: 1px solid var(--theme-outline-variant);
+  border-radius: var(--shape-technical);
+  color: var(--theme-primary);
+  background: var(--theme-surface-container-low);
+  font-family: var(--font-code);
+}
+
+.card-page .inline-math,
+.measure-stage .inline-math {
+  color: var(--theme-on-surface);
+}
+
+.card-page .markdown-list,
+.measure-stage .markdown-list {
+  padding-left: 1.48em;
+}
+
+.card-page .markdown-list li,
+.measure-stage .markdown-list li {
+  padding-left: .2em;
+  margin: .22em 0;
+}
+
+.card-page .markdown-list li::marker,
+.measure-stage .markdown-list li::marker {
+  color: var(--theme-primary);
+  font-weight: 800;
+}
+
+.card-page blockquote,
+.measure-stage blockquote {
+  padding: 17px 22px;
+  border: 0;
+  border-left: 5px solid var(--theme-primary);
+  border-radius: 0 var(--shape-container) var(--shape-container) 0;
+  color: var(--theme-on-surface-variant);
+  background: var(--theme-surface-container-low);
+  box-shadow: none;
+}
+
+.card-page hr,
+.measure-stage hr {
+  width: 28%;
+  height: 1px;
+  margin: 14px auto;
+  background: var(--theme-outline-variant);
+}
+
+.card-page .code-card,
+.measure-stage .code-card {
+  border: 1px solid var(--theme-outline-variant);
+  border-radius: var(--shape-technical);
+  background: var(--theme-code-surface);
+  box-shadow: none;
+}
+
+.card-page .code-toolbar,
+.measure-stage .code-toolbar {
+  height: 38px;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  color: var(--theme-on-surface-variant);
+  background: var(--theme-code-toolbar);
+  border-bottom: 1px solid var(--theme-outline-variant);
+  font-size: 16px;
+  letter-spacing: .02em;
+  font-family: var(--font-code);
+}
+
+.card-page .code-window-controls,
+.measure-stage .code-window-controls {
+  display: none;
+}
+
+.card-page .code-language,
+.measure-stage .code-language {
+  grid-column: 1;
+  color: var(--theme-primary);
+  font-weight: 760;
+  text-transform: lowercase;
+}
+
+.card-page .code-meta,
+.measure-stage .code-meta {
+  grid-column: 3;
+  justify-self: end;
+  color: var(--theme-on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+
+.card-page .code-card pre,
+.measure-stage .code-card pre {
+  padding: 20px 22px;
+  color: var(--theme-on-surface);
+  line-height: 1.58;
+  font-family: var(--font-code);
+}
+
+.card-page .code-lines,
+.measure-stage .code-lines {
+  padding-left: 58px !important;
+}
+
+.card-page .code-line-list li::marker,
+.measure-stage .code-line-list li::marker {
+  color: var(--theme-on-surface-variant);
+}
+
+.card-page .token.comment,
+.card-page .token.prolog,
+.card-page .token.doctype,
+.card-page .token.cdata,
+.measure-stage .token.comment,
+.measure-stage .token.prolog,
+.measure-stage .token.doctype,
+.measure-stage .token.cdata { color: var(--theme-syntax-comment); }
+.card-page .token.property,
+.card-page .token.tag,
+.card-page .token.constant,
+.card-page .token.symbol,
+.card-page .token.deleted,
+.measure-stage .token.property,
+.measure-stage .token.tag,
+.measure-stage .token.constant,
+.measure-stage .token.symbol,
+.measure-stage .token.deleted { color: var(--theme-syntax-keyword); }
+.card-page .token.boolean,
+.card-page .token.number,
+.measure-stage .token.boolean,
+.measure-stage .token.number { color: var(--theme-syntax-number); }
+.card-page .token.selector,
+.card-page .token.attr-name,
+.card-page .token.string,
+.card-page .token.char,
+.card-page .token.builtin,
+.card-page .token.inserted,
+.measure-stage .token.selector,
+.measure-stage .token.attr-name,
+.measure-stage .token.string,
+.measure-stage .token.char,
+.measure-stage .token.builtin,
+.measure-stage .token.inserted { color: var(--theme-syntax-string); }
+.card-page .token.atrule,
+.card-page .token.attr-value,
+.card-page .token.keyword,
+.measure-stage .token.atrule,
+.measure-stage .token.attr-value,
+.measure-stage .token.keyword { color: var(--theme-syntax-keyword); }
+.card-page .token.function,
+.card-page .token.class-name,
+.measure-stage .token.function,
+.measure-stage .token.class-name { color: var(--theme-syntax-function); }
+
+.card-page .table-frame,
+.measure-stage .table-frame {
+  overflow: hidden;
+  border: 1px solid var(--theme-outline-variant);
+  border-radius: var(--shape-container);
+  background: var(--theme-table-surface);
+  box-shadow: var(--theme-table-shadow);
+  line-height: 1.48;
+}
+
+.card-page .table-frame th,
+.card-page .table-frame td,
+.measure-stage .table-frame th,
+.measure-stage .table-frame td {
+  padding: 12px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--theme-outline-variant);
+}
+
+.card-page .table-frame th,
+.measure-stage .table-frame th {
+  color: var(--theme-on-surface);
+  background: var(--theme-table-header);
+  font-weight: 780;
+}
+
+.card-page .table-frame tbody tr:nth-child(odd),
+.measure-stage .table-frame tbody tr:nth-child(odd) {
+  background: var(--theme-table-row-odd);
+}
+
+.card-page .table-frame tbody tr:nth-child(even),
+.measure-stage .table-frame tbody tr:nth-child(even) {
+  background: var(--theme-table-row-even);
+}
+
+.card-page .table-frame tr:last-child td,
+.measure-stage .table-frame tr:last-child td {
+  border-bottom: 0;
+}
+
+.card-page .table-cell-align-right,
+.measure-stage .table-cell-align-right {
+  font-variant-numeric: tabular-nums;
+}
+
+.card-page .math-display,
+.measure-stage .math-display {
+  padding: 15px 10px;
+  border: 0;
+  border-radius: 0;
+  color: var(--theme-on-surface);
+  background: transparent;
+  text-align: center;
+}
+
+.card-page .image-card,
+.measure-stage .image-card {
+  padding: 12px;
+  border: 1px solid var(--theme-outline-variant);
+  border-radius: var(--shape-container);
+  background: var(--theme-surface-container-low);
+}
+
+.card-page .image-card img,
+.measure-stage .image-card img {
+  border-radius: var(--shape-technical);
+  background: var(--theme-surface-container);
+}
+
+.card-page .image-card figcaption,
+.measure-stage .image-card figcaption {
+  color: var(--theme-on-surface-variant);
+}
+
+.card-page .image-missing,
+.measure-stage .image-missing {
+  border-color: var(--theme-outline);
+  border-radius: var(--shape-container);
+  color: var(--theme-on-surface-variant);
+  background: var(--theme-surface-container-low);
+}
+
+.card-page .continuation-label,
+.measure-stage .continuation-label {
+  padding: 4px 10px;
+  border-radius: var(--shape-technical);
+  color: var(--theme-on-primary-container);
+  background: var(--theme-primary-container);
+  font-size: 17px;
+  font-weight: 760;
+}
+
+.card-page .card-footer {
+  border-color: var(--theme-outline-variant);
+  color: var(--theme-on-surface-variant);
+}
+
+.card-page .page-number {
+  color: var(--theme-primary);
+  font-family: var(--font-code);
+  font-variant-numeric: tabular-nums;
+}
+
+.card-page .card-cover,
+.measure-stage .card-cover {
+  min-height: 206px;
+  padding: 30px 34px 32px;
+  border: 1px solid var(--theme-outline-variant);
+  border-radius: var(--shape-cover);
+  color: var(--theme-on-surface);
+  background: var(--theme-surface-container-low);
+  box-shadow: none;
+}
+
+.card-page .card-cover-decoration,
+.measure-stage .card-cover-decoration {
+  right: -42px;
+  top: -42px;
+  width: 170px;
+  height: 170px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--cover-decoration);
+  opacity: 1;
+}
+
+.card-page .card-cover-kicker,
+.measure-stage .card-cover-kicker {
+  color: var(--theme-primary);
+  font-size: 17px;
+  font-weight: 780;
+  letter-spacing: .13em;
+}
+
+.card-page .card-cover-title,
+.measure-stage .card-cover-title {
+  color: var(--theme-on-surface);
+  font-size: 68px;
+  font-weight: 760;
+  line-height: 1.1;
+  letter-spacing: -.052em;
+}
+
+.card-page .card-cover.cover-title-long .card-cover-title,
+.measure-stage .card-cover.cover-title-long .card-cover-title {
+  font-size: 60px;
+}
+
+.card-page .card-cover.cover-title-xlong .card-cover-title,
+.measure-stage .card-cover.cover-title-xlong .card-cover-title {
+  font-size: 52px;
+}
+
+.card-page .card-cover-subtitle,
+.measure-stage .card-cover-subtitle {
+  color: var(--theme-on-surface-variant);
+  font-size: 23px;
+  line-height: 1.48;
+}
+
+.card-page .card-content.cover-only .card-cover,
+.measure-stage .card-content.cover-only .card-cover {
+  min-height: 100%;
+  padding: 72px 58px;
+}
+
+.card-page .card-content.cover-only .card-cover-title,
+.measure-stage .card-content.cover-only .card-cover-title {
+  font-size: 82px;
+}
+
+.card-page .card-content.cover-only .card-cover.cover-title-long .card-cover-title,
+.measure-stage .card-content.cover-only .card-cover.cover-title-long .card-cover-title {
+  font-size: 74px;
+}
+
+.card-page .card-content.cover-only .card-cover.cover-title-xlong .card-cover-title,
+.measure-stage .card-content.cover-only .card-cover.cover-title-xlong .card-cover-title {
+  font-size: 66px;
+}
+
+/* 纯净排版: the formal default. The white page and neutral rules stay out of
+ * the way while still giving code and tables enough technical distinction. */
+.theme-minimal {
+  --theme-surface: #ffffff;
+  --theme-surface-container-low: #fafafa;
+  --theme-surface-container: #f5f5f5;
+  --theme-surface-container-high: #eeeeee;
+  --theme-on-surface: #1f1f1f;
+  --theme-on-surface-variant: #666666;
+  --theme-primary: #303030;
+  --theme-primary-container: #e9e9e9;
+  --theme-on-primary-container: #1f1f1f;
+  --theme-outline: #8a8a8a;
+  --theme-outline-variant: #dedede;
+  --theme-code-surface: #fafafa;
+  --theme-code-toolbar: #f3f3f3;
+  --theme-table-surface: #fafafa;
+  --theme-table-header: #f0f0f0;
+  --theme-table-row-odd: #ffffff;
+  --theme-table-row-even: #f7f7f7;
+  --theme-syntax-comment: #767676;
+  --theme-syntax-keyword: #4d4d4d;
+  --theme-syntax-string: #456a55;
+  --theme-syntax-function: #425c79;
+  --theme-syntax-number: #735627;
+  --shape-technical: 5px;
+  --shape-container: 0;
+  --shape-cover: 0;
+  --heading-marker-radius: 0;
+}
+
+.card-page.theme-minimal { background: #ffffff; background-image: none; }
+.theme-minimal .card-cover {
+  min-height: 174px;
+  padding: 16px 0 30px;
+  border: 0;
+  border-bottom: 1px solid #303030;
+  border-radius: 0;
+  background: transparent;
+}
+.theme-minimal .card-cover-decoration { display: none; }
+.theme-minimal .card-cover-title { max-width: 100%; }
+.theme-minimal .card-content.cover-only .card-cover { padding: 64px 0; border-bottom-width: 2px; }
+.theme-minimal .heading.depth-2::after { background: #303030; }
+.theme-minimal .heading.depth-3 { color: #4d4d4d; }
+.theme-minimal .heading.depth-3::before { background: #bdbdbd; }
+.theme-minimal blockquote { border-left-color: #777777; background: transparent; border-radius: 0; }
+.theme-minimal .table-frame { border-color: #dadada; border-radius: 0; background: var(--theme-table-surface); box-shadow: none; }
+.theme-minimal .table-frame th { border-bottom: 1px solid #555555; background: var(--theme-table-header); }
+.theme-minimal .code-card { border-color: #dedede; background: #fafafa; box-shadow: none; }
+.theme-minimal .code-toolbar { background: #f3f3f3; border-bottom-color: #dedede; }
+
+/* 柔光浅紫: a light, modern tonal composition with a restrained Mac-style
+ * code toolbar. It replaces the previous wine editorial direction. */
+.theme-editorial {
+  --theme-surface: #fcf9ff;
+  --theme-surface-container-low: #f7f1ff;
+  --theme-surface-container: #eee5f8;
+  --theme-surface-container-high: #e5daf2;
+  --theme-on-surface: #201a2a;
+  --theme-on-surface-variant: #625b6a;
+  --theme-primary: #66558f;
+  --theme-primary-container: #e9ddff;
+  --theme-on-primary-container: #211235;
+  --theme-outline: #7c7488;
+  --theme-outline-variant: #d1c5dd;
+  --theme-code-surface: #fefcff;
+  --theme-code-toolbar: #f6f0fc;
+  --theme-table-surface: #f7f2fb;
+  --theme-table-header: #e9ddf3;
+  --theme-table-row-odd: #fbf8fd;
+  --theme-table-row-even: #f4eef9;
+  --theme-table-shadow: 4px 7px 16px rgba(57, 40, 88, .055);
+  --theme-math-surface: transparent;
+  --theme-syntax-comment: #78737e;
+  --theme-syntax-keyword: #66558f;
+  --theme-syntax-string: #3d755f;
+  --theme-syntax-function: #35677c;
+  --theme-syntax-number: #885a22;
+  --shape-technical: 6px;
+  --shape-container: 10px;
+  --shape-cover: 16px;
+  --heading-marker-radius: 0;
+  --cover-decoration: #e3d6f6;
+}
+
+.card-page.theme-editorial {
+  background: #fcf9ff;
+  background-image: radial-gradient(circle at 100% 0%, rgba(102, 85, 143, .10), transparent 26%);
+}
+
+.theme-editorial .card-cover {
+  padding-left: 38px;
+  border-left: 8px solid var(--theme-primary);
+  background: #fdfaff;
+}
+
+.theme-editorial .card-cover-decoration {
+  right: 0;
+  top: 0;
+  width: 116px;
+  height: 14px;
+  border-radius: 0;
+  background: var(--theme-primary);
+  opacity: .16;
+}
+
+.theme-editorial .heading.depth-3 { color: var(--theme-primary); }
+.theme-editorial .heading.depth-3::before { background: var(--theme-primary); }
+.theme-editorial .card-content.cover-only .card-cover { padding-left: 66px; border-left-width: 10px; }
+.theme-editorial .code-card {
+  border-color: #ded2ec;
+  background: #fefcff;
+  box-shadow: 0 8px 20px rgba(57, 40, 88, .06);
+}
+.theme-editorial .code-toolbar {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  background: #f6f0fc;
+  border-bottom-color: #e6dbf2;
+}
+.theme-editorial .code-window-controls {
+  display: inline-flex;
+  grid-column: 1;
+  align-items: center;
+  gap: 6px;
+}
+.theme-editorial .code-language { grid-column: 2; }
+.theme-editorial .code-window-dot {
+  width: 9px;
+  height: 9px;
+  display: block;
+  border-radius: 50%;
+}
+.theme-editorial .code-window-dot:nth-child(1) { background: #d99aa8; }
+.theme-editorial .code-window-dot:nth-child(2) { background: #d8bf84; }
+.theme-editorial .code-window-dot:nth-child(3) { background: #98bca5; }
+.theme-editorial .code-card pre { background: #fefcff; }
+.theme-editorial .table-frame {
+  border-color: #ded2ec;
+  background: var(--theme-table-surface);
+  box-shadow: var(--theme-table-shadow);
+}
+.theme-editorial .table-frame th { background: var(--theme-table-header); }
+
+/* 雾松笔记: a clear pine-green tonal composition. It remains distinct from
+ * the purple and blue laboratory themes without returning to hand-note
+ * paper, terracotta, yellow, or coffee-shop brown. */
+.theme-notebook {
+  --theme-surface: #f8fcf8;
+  --theme-surface-container-low: #f0f7f1;
+  --theme-surface-container: #dfece2;
+  --theme-surface-container-high: #d2e3d5;
+  --theme-on-surface: #18352a;
+  --theme-on-surface-variant: #506a5b;
+  --theme-primary: #356c59;
+  --theme-primary-container: #c3eed5;
+  --theme-on-primary-container: #083821;
+  --theme-outline: #708477;
+  --theme-outline-variant: #c7d8cb;
+  --theme-code-surface: #f5faf5;
+  --theme-code-toolbar: #e3efe4;
+  --theme-table-surface: #eef6ef;
+  --theme-table-header: #dceade;
+  --theme-table-row-odd: #f8fcf8;
+  --theme-table-row-even: #eff7f0;
+  --theme-table-shadow: 4px 7px 16px rgba(28, 69, 47, .045);
+  --theme-math-surface: #f3f9f4;
+  --theme-syntax-comment: #718078;
+  --theme-syntax-keyword: #2f6a56;
+  --theme-syntax-string: #34775b;
+  --theme-syntax-function: #38637e;
+  --theme-syntax-number: #875d20;
+  --shape-technical: 8px;
+  --shape-container: 14px;
+  --shape-cover: 28px;
+  --heading-marker-width: 86px;
+  --heading-marker-height: 6px;
+  --cover-decoration: #b9dcc4;
+}
+
+.card-page.theme-notebook {
+  background: #f8fcf8;
+  background-image: radial-gradient(circle at 100% 0%, rgba(53, 108, 89, .10), transparent 26%);
+}
+
+.theme-notebook .card-cover {
+  border-color: #c8dccd;
+  background: linear-gradient(135deg, #f9fdf9 0%, #e6f2e8 100%);
+}
+
+.theme-notebook .card-cover-decoration {
+  right: -34px;
+  top: -46px;
+  width: 196px;
+  height: 196px;
+  background: #b9dcc4;
+  opacity: .72;
+}
+
+.theme-notebook .card-cover-kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .62);
+  letter-spacing: .1em;
+}
+
+.theme-notebook .heading.depth-2::after { border-radius: 999px; }
+.theme-notebook .heading.depth-3 { color: var(--theme-primary); }
+.theme-notebook .heading.depth-3::before { border-radius: 999px; background: var(--theme-primary); }
+.theme-notebook .table-frame th { background: var(--theme-table-header); }
+.theme-notebook .card-content.cover-only .card-cover { padding: 76px 62px; }
+
+/* 雾蓝实验室: preserve the strongest existing direction, but confine the
+ * grid to the cover and keep the reading surface almost neutral. */
+.theme-research {
+  --theme-surface: #f8fcfd;
+  --theme-surface-container-low: #eff7f8;
+  --theme-surface-container: #e2f0f3;
+  --theme-surface-container-high: #d5e7eb;
+  --theme-on-surface: #17343e;
+  --theme-on-surface-variant: #587078;
+  --theme-primary: #17667c;
+  --theme-primary-container: #c3eaf4;
+  --theme-on-primary-container: #063542;
+  --theme-outline: #71878e;
+  --theme-outline-variant: #c6dce1;
+  --theme-code-surface: #f5fafb;
+  --theme-code-toolbar: #e3f0f3;
+  --theme-table-surface: #edf6f8;
+  --theme-table-header: #dcecf0;
+  --theme-table-row-odd: #f7fbfc;
+  --theme-table-row-even: #eef6f7;
+  --theme-table-shadow: 4px 7px 16px rgba(24, 83, 102, .045);
+  --theme-math-surface: #f1f8f9;
+  --theme-syntax-comment: #6e7f83;
+  --theme-syntax-keyword: #266d86;
+  --theme-syntax-string: #33775e;
+  --theme-syntax-function: #2f6688;
+  --theme-syntax-number: #8a6227;
+  --shape-technical: 6px;
+  --shape-container: 10px;
+  --shape-cover: 12px;
+  --heading-marker-width: 96px;
+  --cover-decoration: transparent;
+}
+
+.card-page.theme-research {
+  background: #f8fcfd;
+  background-image: radial-gradient(circle at 100% 0%, rgba(23, 102, 124, .08), transparent 25%);
+}
+
+.theme-research .card-cover {
+  border-color: #bfd7dd;
+  background-color: #f2fafb;
+  background-image: linear-gradient(rgba(23, 102, 124, .075) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 102, 124, .075) 1px, transparent 1px);
+  background-size: 38px 38px;
+}
+
+.theme-research .card-cover-decoration {
+  right: 24px;
+  top: 21px;
+  width: 70px;
+  height: 70px;
+  border: 2px solid #79a6b3;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, .26);
+  transform: rotate(13deg);
+}
+
+.theme-research .card-cover-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-research .card-cover-kicker::before {
+  content: '';
+  width: 22px;
+  height: 3px;
+  background: var(--theme-primary);
+}
+
+.theme-research .heading.depth-3 { color: var(--theme-primary); }
+.theme-research .heading.depth-3::before { background: #7ba8b5; }
+.theme-research .table-frame th { background: var(--theme-table-header); }
+
+/* macOS 编辑器：这是独立的代码块外观，而非新的整张卡片主题。
+ * 以银灰窗口栏和白色编辑区呼应 macOS 的浅色外观；外层卡片仍完整保留所选模板。
+ * CardPage 和 MeasureStage 同时带上 code-appearance-*，因此额外的窗口栏
+ * 高度会进入真实测量和分页。 */
+.card-page.code-appearance-macos .code-card,
+.measure-stage.code-appearance-macos .code-card {
+  --theme-syntax-comment: #7d8491;
+  --theme-syntax-keyword: #8a4fa6;
+  --theme-syntax-string: #287553;
+  --theme-syntax-function: #166d9a;
+  --theme-syntax-number: #a26022;
+  overflow: hidden;
+  border-color: #c9cbd2;
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 7px 9px 20px rgba(47, 50, 62, .12), inset 0 1px 0 rgba(255, 255, 255, .92);
+}
+
+.card-page.code-appearance-macos .code-toolbar,
+.measure-stage.code-appearance-macos .code-toolbar {
+  height: 44px;
+  grid-template-columns: minmax(104px, 1fr) auto minmax(104px, 1fr);
+  gap: 12px;
+  padding: 0 17px;
+  border-bottom-color: #d0d2d8;
+  color: #6e7380;
+  background: linear-gradient(180deg, #f5f5f7 0%, #e7e7eb 100%);
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: .025em;
+}
+
+.card-page.code-appearance-macos .code-window-controls,
+.measure-stage.code-appearance-macos .code-window-controls {
+  display: inline-flex;
+  grid-column: 1;
+  align-items: center;
+  gap: 7px;
+}
+
+.card-page.code-appearance-macos .code-window-dot,
+.measure-stage.code-appearance-macos .code-window-dot {
+  width: 11px;
+  height: 11px;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, .16);
+  border-radius: 50%;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .28);
+}
+
+.card-page.code-appearance-macos .code-window-dot:nth-child(1),
+.measure-stage.code-appearance-macos .code-window-dot:nth-child(1) { background: #ff6159; }
+.card-page.code-appearance-macos .code-window-dot:nth-child(2),
+.measure-stage.code-appearance-macos .code-window-dot:nth-child(2) { background: #ffbd2e; }
+.card-page.code-appearance-macos .code-window-dot:nth-child(3),
+.measure-stage.code-appearance-macos .code-window-dot:nth-child(3) { background: #28c941; }
+
+.card-page.code-appearance-macos .code-language,
+.measure-stage.code-appearance-macos .code-language {
+  grid-column: 2;
+  color: #4c515d;
+  font-weight: 720;
+  letter-spacing: .035em;
+}
+
+.card-page.code-appearance-macos .code-meta,
+.measure-stage.code-appearance-macos .code-meta {
+  grid-column: 3;
+  color: #777d89;
+}
+
+.card-page.code-appearance-macos .code-card pre,
+.measure-stage.code-appearance-macos .code-card pre {
+  padding: 22px 24px;
+  color: #2d313b;
+  background: #ffffff;
+  line-height: 1.62;
+}
+
+.card-page.code-appearance-macos .code-lines,
+.measure-stage.code-appearance-macos .code-lines { padding-left: 62px !important; }
+
+.card-page.code-appearance-macos .code-line-list li::marker,
+.measure-stage.code-appearance-macos .code-line-list li::marker { color: #959aa5; }
+
+.card-page.code-appearance-macos .token.punctuation,
+.card-page.code-appearance-macos .token.operator,
+.card-page.code-appearance-macos .token.entity,
+.card-page.code-appearance-macos .token.url,
+.measure-stage.code-appearance-macos .token.punctuation,
+.measure-stage.code-appearance-macos .token.operator,
+.measure-stage.code-appearance-macos .token.entity,
+.measure-stage.code-appearance-macos .token.url { color: #575e6c; }
+
+/* Theme-picker swatches portray the card grammar rather than a single color. */
+.card-theme-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.card-theme-option.theme-minimal .card-theme-swatch {
+  background: linear-gradient(135deg, #ffffff 0 64%, #303030 64%);
+}
+
+.card-theme-option.theme-editorial .card-theme-swatch {
+  background: radial-gradient(circle at 100% 0%, #e3d6f6 0 34%, transparent 35%), #fcf9ff;
+}
+
+.card-theme-option.theme-notebook .card-theme-swatch {
+  background: radial-gradient(circle at 100% 0%, #b9dcc4 0 34%, transparent 35%), #f4faf5;
+}
+
+.card-theme-option.theme-research .card-theme-swatch {
+  background-color: #f2fafb;
+  background-image: linear-gradient(rgba(23, 102, 124, .2) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 102, 124, .2) 1px, transparent 1px);
+  background-size: 7px 7px;
+}

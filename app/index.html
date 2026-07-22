@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      try {
+        const theme = localStorage.getItem("md2card-ui-theme");
+        document.documentElement.dataset.uiTheme = theme === "dark" || (theme !== "light" && matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      } catch {}
+    </script>
+    <meta
+      name="description"
+      content="md2card 在线 Markdown 工作台：在本地浏览器中预览技术卡片并下载 PNG ZIP。"
+    />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href="https://haodongcui.github.io/md2card/app/" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <title>在线编辑器 · md2card</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="../src/main.tsx"></script>
+  </body>
+</html>

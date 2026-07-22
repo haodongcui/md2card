@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1260" height="620" viewBox="0 0 1260 620" role="img" aria-labelledby="title">
+  <title id="title">扩散采样与卡片导出步骤</title>
+  <defs>
+    <linearGradient id="panel" x1="0" x2="1"><stop stop-color="#f4effb"/><stop offset="1" stop-color="#e6edf8"/></linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 9 5 0 10z" fill="#7664a5"/></marker>
+  </defs>
+  <rect width="1260" height="620" rx="30" fill="url(#panel)"/>
+  <g font-family="Arial, 'Microsoft YaHei', sans-serif">
+    <text x="70" y="95" fill="#443d61" font-size="42" font-weight="700">复杂内容的处理流水线</text>
+    <text x="72" y="134" fill="#77708e" font-size="22">从资源绑定到分页、预览和导出，每一步都保留可检查状态</text>
+    <g fill="#fff" stroke="#c9bfdf" stroke-width="2">
+      <rect x="72" y="245" width="190" height="150" rx="18"/><rect x="330" y="245" width="190" height="150" rx="18"/><rect x="588" y="245" width="190" height="150" rx="18"/><rect x="846" y="245" width="190" height="150" rx="18"/><rect x="1104" y="245" width="110" height="150" rx="18"/>
+    </g>
+    <g fill="#51496e" font-size="25" font-weight="700"><text x="108" y="307">资源扫描</text><text x="365" y="307">内容解析</text><text x="625" y="307">DOM 测量</text><text x="884" y="307">分页预览</text><text x="1127" y="307">导出</text></g>
+    <g fill="#7d7494" font-size="18"><text x="100" y="345">图片路径</text><text x="109" y="372">冲突 / 缺失</text><text x="365" y="345">公式、表格</text><text x="374" y="372">代码、标题</text><text x="620" y="345">字体与图片</text><text x="628" y="372">真实高度</text><text x="885" y="345">安全区</text><text x="878" y="372">卡片列数</text><text x="1122" y="345">PNG</text><text x="1118" y="372">ZIP</text></g>
+    <g fill="none" stroke="#7664a5" stroke-width="8" marker-end="url(#arrow)"><path d="M274 320h42"/><path d="M532 320h42"/><path d="M790 320h42"/><path d="M1048 320h42"/></g>
+    <path d="M110 505c132-54 218 32 330-6s208-86 324-27 226 54 394-28" fill="none" stroke="#a890d0" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="110" cy="505" r="9" fill="#7259a6"/><circle cx="440" cy="499" r="9" fill="#7259a6"/><circle cx="764" cy="472" r="9" fill="#7259a6"/><circle cx="1158" cy="444" r="9" fill="#7259a6"/>
+  </g>
+</svg>

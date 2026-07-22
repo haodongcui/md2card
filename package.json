@@ -1,0 +1,33 @@
+{
+  "name": "md2card",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.2.6",
+    "@fontsource-variable/noto-sans-sc": "^5.2.6",
+    "fflate": "^0.8.2",
+    "html-to-image": "^1.11.13",
+    "katex": "^0.16.22",
+    "preact": "^10.26.4",
+    "prismjs": "^1.30.0",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "remark-parse": "^11.0.0",
+    "unified": "^11.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "@types/prismjs": "^1.26.3",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vitest": "^3.2.4"
+  }
+}
