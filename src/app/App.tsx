@@ -92,7 +92,7 @@ type ReadingSetting =
   | "headingH2BeforeSpacing"
   | "headingH3BeforeSpacing"
   | "codeFontSize";
-type SettingsCategory = "text" | "heading" | "technical" | "canvas";
+type SettingsCategory = "theme" | "canvas" | "layout" | "content";
 type ExportPreflight = {
   status: "idle" | "checking" | "ready" | "error";
   message: string;
@@ -337,7 +337,7 @@ export function App() {
   );
   const [sidebarWidth, setSidebarWidth] = useState(520);
   const [activeSettingsCategory, setActiveSettingsCategory] =
-    useState<SettingsCategory>("canvas");
+    useState<SettingsCategory>("theme");
   const [uiTheme, setUiTheme] = useState<UiTheme>(() => {
     try {
       const saved = localStorage.getItem("md2card-ui-theme");
@@ -663,6 +663,34 @@ export function App() {
     setImageBindingOverrides({});
     setMeasurements({});
     setExportState({ status: "idle", message });
+  };
+
+  const clearArticle = () => {
+    const hasArticleData = Boolean(
+      markdown.trim() ||
+        titleOverride.trim() ||
+        sourceFileName ||
+        localImages.length ||
+        markdownAssetImport,
+    );
+    if (
+      hasArticleData &&
+      !window.confirm(
+        "清空当前文章、已导入图片与图片绑定吗？排版设置会保留。",
+      )
+    )
+      return;
+
+    setMarkdown("");
+    setTitleOverride("");
+    setSourceFileName("");
+    setMeasurements({});
+    setSelectedImageReference(null);
+    setPendingBindingReference(null);
+    setMarkdownAssetImport(null);
+    setMarkdownAssetError("");
+    setMarkdownAssetBusy(false);
+    replaceLocalImages([], "已清空当前文章与导入图片，排版设置已保留。");
   };
 
   const addLocalImageRecords = (images: LocalImage[], message: string) => {
@@ -1317,6 +1345,14 @@ export function App() {
                 <h1>Markdown 编辑器</h1>
               </div>
               <div class="panel-heading-actions">
+                <button
+                  type="button"
+                  class="clear-article-button"
+                  onClick={clearArticle}
+                  title="清空文章、已导入图片与图片绑定，保留排版设置"
+                >
+                  清空文章
+                </button>
                 <label class="file-button recommended-file-button">
                   导入 Markdown
                   <input
@@ -1452,112 +1488,79 @@ export function App() {
                 <h2>阅读设置</h2>
               </div>
             </div>
-            <fieldset class="quick-settings">
-              <legend>快捷设置</legend>
-              <div class="quick-settings-grid">
-                <div>
-                  <span class="quick-setting-label">画布比例</span>
-                  <div class="segmented">
-                    <button
-                      class={config.ratio === "3:4" ? "selected" : ""}
-                      onClick={() => updateConfig("ratio", "3:4")}
-                    >
-                      3:4
-                      <br />
-                      <small>标准卡片</small>
-                    </button>
-                    <button
-                      class={config.ratio === "2:3" ? "selected" : ""}
-                      onClick={() => updateConfig("ratio", "2:3")}
-                    >
-                      2:3
-                      <br />
-                      <small>技术长图</small>
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <span class="quick-setting-label">
-                    整体密度（正文、标题、代码）
-                  </span>
-                  <div class="density-choices">
-                    {(["relaxed", "balanced", "compact"] as const).map(
-                      (density) => (
-                        <button
-                          key={density}
-                          class={config.density === density ? "selected" : ""}
-                          onClick={() => applyDensityPreset(density)}
-                        >
-                          {
-                            {
-                              relaxed: "舒展",
-                              balanced: "技术平衡",
-                              compact: "紧凑",
-                            }[density]
-                          }
-                        </button>
-                      ),
-                    )}
-                  </div>
-                </div>
-              </div>
-              <p class="field-help">
-                预设会同步调整正文字号、行距、标题留白与代码字号；表格、公式和图片保持单独控制。
-              </p>
-              {config.density === "custom" && (
-                <div class="density-custom-state">
-                  <span>已按下方参数微调整体密度。</span>
-                  <button
-                    type="button"
-                    class="secondary-button"
-                    onClick={() => applyDensityPreset("balanced")}
-                  >
-                    恢复技术平衡
-                  </button>
-                </div>
-              )}
-            </fieldset>
             <nav class="settings-category-nav" aria-label="排版分类">
+              <button
+                type="button"
+                class={activeSettingsCategory === "theme" ? "selected" : ""}
+                aria-pressed={activeSettingsCategory === "theme"}
+                onClick={() => setActiveSettingsCategory("theme")}
+              >
+                <span>主题</span>
+              </button>
               <button
                 type="button"
                 class={activeSettingsCategory === "canvas" ? "selected" : ""}
                 aria-pressed={activeSettingsCategory === "canvas"}
                 onClick={() => setActiveSettingsCategory("canvas")}
               >
-                <strong>画布</strong>
-                <small>主题 · 首卡 · 边距</small>
+                <span>画布</span>
               </button>
               <button
                 type="button"
-                class={activeSettingsCategory === "text" ? "selected" : ""}
-                aria-pressed={activeSettingsCategory === "text"}
-                onClick={() => setActiveSettingsCategory("text")}
+                class={activeSettingsCategory === "layout" ? "selected" : ""}
+                aria-pressed={activeSettingsCategory === "layout"}
+                onClick={() => setActiveSettingsCategory("layout")}
               >
-                <strong>正文</strong>
-                <small>字号 · 行距 · 间距</small>
+                <span>排版</span>
               </button>
               <button
                 type="button"
-                class={activeSettingsCategory === "heading" ? "selected" : ""}
-                aria-pressed={activeSettingsCategory === "heading"}
-                onClick={() => setActiveSettingsCategory("heading")}
+                class={activeSettingsCategory === "content" ? "selected" : ""}
+                aria-pressed={activeSettingsCategory === "content"}
+                onClick={() => setActiveSettingsCategory("content")}
               >
-                <strong>标题</strong>
-                <small>留白 · 分页</small>
-              </button>
-              <button
-                type="button"
-                class={activeSettingsCategory === "technical" ? "selected" : ""}
-                aria-pressed={activeSettingsCategory === "technical"}
-                onClick={() => setActiveSettingsCategory("technical")}
-              >
-                <strong>技术块</strong>
-                <small>表格 · 公式 · 代码</small>
+                <span>内容</span>
               </button>
             </nav>
-            {activeSettingsCategory === "text" && (
+            {activeSettingsCategory === "layout" && (
               <section class="settings-category-content">
-                <h3>正文排版</h3>
+                <h3>排版</h3>
+                <h4>整体密度</h4>
+                <div class="density-choices density-preset-choices">
+                  {(["relaxed", "balanced", "compact"] as const).map(
+                    (density) => (
+                      <button
+                        key={density}
+                        class={config.density === density ? "selected" : ""}
+                        onClick={() => applyDensityPreset(density)}
+                      >
+                        {
+                          {
+                            relaxed: "舒展",
+                            balanced: "技术平衡",
+                            compact: "紧凑",
+                          }[density]
+                        }
+                      </button>
+                    ),
+                  )}
+                </div>
+                <p class="field-help">
+                  预设会同步调整正文字号、行距、标题留白与代码字号；表格、公式和图片保持单独控制。
+                </p>
+                {config.density === "custom" && (
+                  <div class="density-custom-state">
+                    <span>已按下方参数微调整体密度。</span>
+                    <button
+                      type="button"
+                      class="secondary-button"
+                      onClick={() => applyDensityPreset("balanced")}
+                    >
+                      恢复技术平衡
+                    </button>
+                  </div>
+                )}
+                <h4>正文</h4>
                 <div class="setting-control-grid">
                   <label class="range-label">
                     正文字号 <output>{config.bodyFontSize}px</output>
@@ -1609,9 +1612,9 @@ export function App() {
                 </div>
               </section>
             )}
-            {activeSettingsCategory === "heading" && (
+            {activeSettingsCategory === "layout" && (
               <section class="settings-category-content">
-                <h3>标题结构</h3>
+                <h3>标题</h3>
                 <p class="field-help">
                   标题留白只在标题不位于卡片首块时生效，并会参与分页计算。
                 </p>
@@ -1708,9 +1711,9 @@ export function App() {
                 </div>
               </section>
             )}
-            {activeSettingsCategory === "technical" && (
+            {activeSettingsCategory === "content" && (
               <section class="settings-category-content">
-                <h3>技术块</h3>
+                <h3>内容</h3>
                 <div class="setting-control-grid">
                   <label class="range-label">
                     表格字号 <output>{config.tableFontSize}px</output>
@@ -1759,36 +1762,26 @@ export function App() {
                     />
                   </label>
                 </div>
-                <h4>代码块外观</h4>
-                <p class="field-help">
-                  跟随模板保留卡片主题的技术面；macOS 编辑器使用银灰窗口栏、三色控制点和白色代码区。
-                </p>
-                <div class="segmented code-block-appearance-control">
-                  <button
-                    type="button"
-                    class={
-                      config.codeBlockAppearance === "theme" ? "selected" : ""
-                    }
-                    aria-pressed={config.codeBlockAppearance === "theme"}
-                    onClick={() => updateConfig("codeBlockAppearance", "theme")}
-                  >
-                    跟随模板
-                    <br />
-                    <small>简洁技术面</small>
-                  </button>
-                  <button
-                    type="button"
-                    class={
-                      config.codeBlockAppearance === "macos" ? "selected" : ""
-                    }
-                    aria-pressed={config.codeBlockAppearance === "macos"}
-                    onClick={() => updateConfig("codeBlockAppearance", "macos")}
-                  >
-                    macOS 编辑器
-                    <br />
-                    <small>窗口栏 · 白色代码区</small>
-                  </button>
+                <h4>图片</h4>
+                <div class="setting-control-grid">
+                  <label class="range-label">
+                    图片最大页高{" "}
+                    <output>{config.imageMaxHeightPercent}%</output>
+                    <input
+                      type="range"
+                      min="35"
+                      max="68"
+                      value={config.imageMaxHeightPercent}
+                      onInput={(event) =>
+                        updateConfig(
+                          "imageMaxHeightPercent",
+                          Number(event.currentTarget.value),
+                        )
+                      }
+                    />
+                  </label>
                 </div>
+                <h4>代码</h4>
                 <label class="check-label">
                   <input
                     type="checkbox"
@@ -1804,36 +1797,19 @@ export function App() {
                 </label>
               </section>
             )}
-            {activeSettingsCategory === "canvas" && (
+            {activeSettingsCategory === "theme" && (
               <section class="settings-category-content">
-                <h3>画布、主题与首卡</h3>
-                <h4>卡片模板</h4>
+                <h3>主题</h3>
                 <p class="field-help">
-                  每套模板同时控制首卡、标题、技术块和纹理；网页浅色/深色外观不会改变导出结果。
+                  主题会同时调整卡片的配色、标题、表格、图注与背景纹理；网页浅色或深色外观不会改变导出结果。
                 </p>
                 <div class="card-theme-grid">
                   {(
                     [
-                      {
-                        id: "minimal",
-                        name: "纯净排版",
-                        hint: "白底 · 正式",
-                      },
-                      {
-                        id: "research",
-                        name: "雾蓝实验室",
-                        hint: "蓝色 · 精确",
-                      },
-                      {
-                        id: "editorial",
-                        name: "柔光浅紫",
-                        hint: "浅紫 · 现代",
-                      },
-                      {
-                        id: "notebook",
-                        name: "雾松笔记",
-                        hint: "绿色 · 清透",
-                      },
+                      { id: "minimal", name: "纯净排版", hint: "白底 · 正式" },
+                      { id: "research", name: "雾蓝实验室", hint: "蓝色 · 精确" },
+                      { id: "editorial", name: "柔光浅紫", hint: "浅紫 · 现代" },
+                      { id: "notebook", name: "雾松笔记", hint: "绿色 · 清透" },
                     ] as const
                   ).map((theme) => (
                     <button
@@ -1849,7 +1825,53 @@ export function App() {
                     </button>
                   ))}
                 </div>
-
+                <h4>代码外观</h4>
+                <div class="segmented code-block-appearance-control">
+                  <button
+                    type="button"
+                    class={config.codeBlockAppearance === "macos" ? "selected" : ""}
+                    aria-pressed={config.codeBlockAppearance === "macos"}
+                    onClick={() => updateConfig("codeBlockAppearance", "macos")}
+                  >
+                    macOS 浅色
+                    <br />
+                    <small>默认 · 窗口栏与白色代码区</small>
+                  </button>
+                  <button
+                    type="button"
+                    class={config.codeBlockAppearance === "theme" ? "selected" : ""}
+                    aria-pressed={config.codeBlockAppearance === "theme"}
+                    onClick={() => updateConfig("codeBlockAppearance", "theme")}
+                  >
+                    跟随主题
+                    <br />
+                    <small>使用卡片主题的技术面</small>
+                  </button>
+                </div>
+              </section>
+            )}
+            {activeSettingsCategory === "canvas" && (
+              <section class="settings-category-content">
+                <h3>画布</h3>
+                <h4>画布比例</h4>
+                <div class="segmented">
+                  <button
+                    class={config.ratio === "3:4" ? "selected" : ""}
+                    onClick={() => updateConfig("ratio", "3:4")}
+                  >
+                    3:4
+                    <br />
+                    <small>标准卡片</small>
+                  </button>
+                  <button
+                    class={config.ratio === "2:3" ? "selected" : ""}
+                    onClick={() => updateConfig("ratio", "2:3")}
+                  >
+                    2:3
+                    <br />
+                    <small>技术长图</small>
+                  </button>
+                </div>
                 <h4>首卡封面</h4>
                 <p class="field-help">
                   融合首页只在第一张卡片展示文章名；标题区域会参与分页，后续卡片不会重复显示。
@@ -1960,25 +1982,7 @@ export function App() {
                     />
                   </label>
                 </div>
-                <h4>图片与页码</h4>
-                <div class="setting-control-grid">
-                  <label class="range-label">
-                    图片最大页高{" "}
-                    <output>{config.imageMaxHeightPercent}%</output>
-                    <input
-                      type="range"
-                      min="35"
-                      max="68"
-                      value={config.imageMaxHeightPercent}
-                      onInput={(event) =>
-                        updateConfig(
-                          "imageMaxHeightPercent",
-                          Number(event.currentTarget.value),
-                        )
-                      }
-                    />
-                  </label>
-                </div>
+                <h4>页码</h4>
                 <label class="check-label">
                   <input
                     type="checkbox"
@@ -1994,22 +1998,6 @@ export function App() {
                 </label>
               </section>
             )}
-            <div class="diagnostic-summary">
-              <strong>{pagePlan.pages.length} 页</strong>
-              {manyPages && (
-                <span class="warning">超过 20 页，发布时建议拆成多篇。</span>
-              )}
-              {diagnostics
-                .filter(
-                  (item) => item.level === "warning" || item.level === "error",
-                )
-                .slice(0, 2)
-                .map((item, index) => (
-                  <span key={index} class={item.level}>
-                    {item.message}
-                  </span>
-                ))}
-            </div>
           </section>
         </aside>
         <div

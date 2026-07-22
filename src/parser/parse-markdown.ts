@@ -14,6 +14,7 @@ type MdNode = {
   lang?: string | null;
   url?: string;
   alt?: string | null;
+  title?: string | null;
   align?: Array<'left' | 'center' | 'right' | null>;
 };
 
@@ -48,6 +49,8 @@ function normalizeMathDelimiters(markdown: string): string {
 function nodeId(index: number, suffix = ''): string {
   return `block-${index}${suffix}`;
 }
+
+const CAPTION_PARAGRAPH = /^(?:图|表)\s*[0-9０-９一二三四五六七八九十]+\s*(?:[.:：、·-]\s*|\s+).+$/;
 
 function toInline(nodes: MdNode[] | undefined): Inline[] {
   if (!nodes) return [];
@@ -85,7 +88,13 @@ function toBlock(node: MdNode, index: number, diagnostics: Diagnostic[], suffix 
     case 'paragraph': {
       const onlyChild = node.children?.length === 1 ? node.children[0] : undefined;
       if (onlyChild?.type === 'image') {
-        return { id, kind: 'image', url: onlyChild.url ?? '', alt: onlyChild.alt ?? '' };
+        return {
+          id,
+          kind: 'image',
+          url: onlyChild.url ?? '',
+          alt: onlyChild.alt ?? '',
+          caption: onlyChild.title ?? undefined,
+        };
       }
       return { id, kind: 'paragraph', children: toInline(node.children) };
     }
@@ -121,7 +130,13 @@ function toBlock(node: MdNode, index: number, diagnostics: Diagnostic[], suffix 
     }
     case 'image':
       diagnostics.push({ level: 'info', message: '本地图片会优先按导入文件夹中的相对路径绑定；远程图片需要允许浏览器读取。', blockId: id });
-      return { id, kind: 'image', url: node.url ?? '', alt: node.alt ?? '' };
+      return {
+        id,
+        kind: 'image',
+        url: node.url ?? '',
+        alt: node.alt ?? '',
+        caption: node.title ?? undefined,
+      };
     default:
       if (node.children?.length) {
         diagnostics.push({ level: 'info', message: `已按内容降级渲染 ${node.type}。`, blockId: id });
@@ -143,6 +158,29 @@ export function inlineText(nodes: Inline[]): string {
     .trim();
 }
 
+/**
+ * A direct `图 1：...` / `表 1：...` paragraph is common in Chinese notes.
+ * Treat it as a caption only when it immediately follows the matching block,
+ * so existing drafts gain semantic captions without requiring a rewrite.
+ */
+function attachAdjacentCaptions(blocks: Block[]): Block[] {
+  const result: Block[] = [];
+  for (const block of blocks) {
+    const previous = result.at(-1);
+    const text = block.kind === 'paragraph' ? inlineText(block.children) : '';
+    if (CAPTION_PARAGRAPH.test(text) && previous?.kind === 'image' && !previous.caption && text.startsWith('图')) {
+      previous.caption = text;
+      continue;
+    }
+    if (CAPTION_PARAGRAPH.test(text) && previous?.kind === 'table' && !previous.caption && text.startsWith('表')) {
+      previous.caption = text;
+      continue;
+    }
+    result.push(block);
+  }
+  return result;
+}
+
 export function parseMarkdown(markdown: string): ArticleDocument {
   const diagnostics: Diagnostic[] = [];
   try {
@@ -153,7 +191,7 @@ export function parseMarkdown(markdown: string): ArticleDocument {
 
     let title = '';
     const first = parsed[0];
-    const blocks = [...parsed];
+    const blocks = attachAdjacentCaptions(parsed);
     if (first?.kind === 'heading' && first.depth === 1) {
       title = inlineText(first.children);
       blocks.shift();

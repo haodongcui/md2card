@@ -15,8 +15,8 @@ export type Block =
   | { id: string; kind: 'blockquote'; children: Block[] }
   | { id: string; kind: 'code'; value: string; language: string }
   | { id: string; kind: 'math'; value: string }
-  | { id: string; kind: 'image'; url: string; alt: string }
-  | { id: string; kind: 'table'; align: Array<'left' | 'center' | 'right' | null>; rows: Inline[][][] }
+  | { id: string; kind: 'image'; url: string; alt: string; caption?: string }
+  | { id: string; kind: 'table'; align: Array<'left' | 'center' | 'right' | null>; rows: Inline[][][]; caption?: string }
   | { id: string; kind: 'thematicBreak' }
   | { id: string; kind: 'pageBreak' };
 
@@ -88,7 +88,7 @@ export const DEFAULT_CONFIG: LayoutConfig = {
   headingH3TailPercent: 11,
   headingH4TailPercent: 6,
   codeLineNumbers: false,
-  codeBlockAppearance: 'theme',
+  codeBlockAppearance: 'macos',
   cardHorizontalPadding: 76,
   cardVerticalPadding: 67,
   imageMaxHeightPercent: 53,

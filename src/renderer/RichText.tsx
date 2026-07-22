@@ -84,23 +84,27 @@ function TableBlock({ block, config }: { block: Extract<Block, { kind: 'table' }
   const [header, ...body] = block.rows;
   const tableStyle = { '--table-font-size': `${config.tableFontSize}px` } as unknown as Record<string, string>;
   return (
-    <div class="table-frame" style={tableStyle}>
-      <table>
-        <thead>
-          <tr>{(header ?? []).map((cell, index) => <th key={index} style={{ textAlign: block.align[index] ?? 'left' }}><InlineContent nodes={cell} /></th>)}</tr>
-        </thead>
-        <tbody>
-          {body.map((row, rowIndex) => (
-            <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex} class={`table-cell-align-${block.align[cellIndex] ?? 'left'}`} style={{ textAlign: block.align[cellIndex] ?? 'left' }}><InlineContent nodes={cell} /></td>)}</tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <figure class="table-card">
+      <div class="table-frame" style={tableStyle}>
+        <table>
+          <thead>
+            <tr>{(header ?? []).map((cell, index) => <th key={index} style={{ textAlign: block.align[index] ?? 'left' }}><InlineContent nodes={cell} /></th>)}</tr>
+          </thead>
+          <tbody>
+            {body.map((row, rowIndex) => (
+              <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex} class={`table-cell-align-${block.align[cellIndex] ?? 'left'}`} style={{ textAlign: block.align[cellIndex] ?? 'left' }}><InlineContent nodes={cell} /></td>)}</tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {block.caption && <figcaption>{block.caption}</figcaption>}
+    </figure>
   );
 }
 
 function ImageBlock({ block, resources }: { block: Extract<Block, { kind: 'image' }>; resources: ImageResourceIndex }) {
   const resolution = resolveImageReference(block.url, resources);
+  const caption = block.caption || block.alt;
   if (!resolution.source) {
     const message = resolution.state === 'ambiguous'
       ? '检测到多个同名或同路径候选图片。请在“管理图片”中选择“自动补齐（选择图片所在文件夹）”，然后重新选择文章根目录。'
@@ -110,7 +114,7 @@ function ImageBlock({ block, resources }: { block: Extract<Block, { kind: 'image
   return (
     <figure class="image-card">
       <img src={resolution.source} alt={block.alt || 'Markdown 图片'} />
-      {block.alt && <figcaption>{block.alt}</figcaption>}
+      {caption && <figcaption>{caption}</figcaption>}
     </figure>
   );
 }

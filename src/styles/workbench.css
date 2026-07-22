@@ -64,11 +64,11 @@
 :root[data-ui-theme="dark"] .github-link,
 :root[data-ui-theme="dark"] .file-button,
 :root[data-ui-theme="dark"] .article-name-control button,
+:root[data-ui-theme="dark"] .clear-article-button,
 :root[data-ui-theme="dark"] .segmented button,
 :root[data-ui-theme="dark"] .density-choices button,
 :root[data-ui-theme="dark"] .secondary-button,
 :root[data-ui-theme="dark"] .range-label,
-:root[data-ui-theme="dark"] .settings-category-nav button,
 :root[data-ui-theme="dark"] .card-theme-option,
 :root[data-ui-theme="dark"] .preview-layout-control,
 :root[data-ui-theme="dark"] .dialog-cancel,
@@ -94,7 +94,6 @@
 
 :root[data-ui-theme="dark"] .segmented button:hover:not(.selected),
 :root[data-ui-theme="dark"] .density-choices button:hover:not(.selected),
-:root[data-ui-theme="dark"] .settings-category-nav button:hover:not(.selected),
 :root[data-ui-theme="dark"] .card-theme-option:hover:not(.selected),
 :root[data-ui-theme="dark"] .export-quality-option:hover:not(.selected) {
   color: var(--workbench-accent);
@@ -187,7 +186,6 @@
 :root[data-ui-theme="dark"] legend,
 :root[data-ui-theme="dark"] .settings-category-content h3,
 :root[data-ui-theme="dark"] .settings-category-content h4,
-:root[data-ui-theme="dark"] .settings-category-nav button strong,
 :root[data-ui-theme="dark"] .card-theme-option strong { color: #f0effa; }
 
 :root[data-ui-theme="dark"] .editor-drop-zone {
@@ -208,11 +206,9 @@
 :root[data-ui-theme="dark"] .article-name-control small,
 :root[data-ui-theme="dark"] .editor-hint,
 :root[data-ui-theme="dark"] .field-help,
-:root[data-ui-theme="dark"] .quick-setting-label,
 :root[data-ui-theme="dark"] .range-label,
 :root[data-ui-theme="dark"] .check-label,
 :root[data-ui-theme="dark"] .text-field,
-:root[data-ui-theme="dark"] .diagnostic-summary,
 :root[data-ui-theme="dark"] .cover-title-source,
 :root[data-ui-theme="dark"] .density-custom-state { color: #bbb8d0; }
 
@@ -235,8 +231,6 @@
 :root[data-ui-theme="dark"] .settings-category-content { border-color: #33334d; }
 :root[data-ui-theme="dark"] .segmented button.selected,
 :root[data-ui-theme="dark"] .density-choices button.selected,
-:root[data-ui-theme="dark"] .settings-category-nav button.selected,
-:root[data-ui-theme="dark"] .card-theme-option.selected,
 :root[data-ui-theme="dark"] .export-quality-option.selected {
   color: #fff;
   border-color: var(--workbench-selected-border);
@@ -244,13 +238,28 @@
   box-shadow: inset 0 0 0 1px rgba(229, 222, 255, .24), 0 5px 14px rgba(8, 6, 19, .2);
 }
 
+:root[data-ui-theme="dark"] .card-theme-option.selected {
+  color: #f0effa;
+  border-color: var(--workbench-selected-border);
+  background: #25233c;
+  box-shadow: inset 0 0 0 1px rgba(229, 222, 255, .25), 0 8px 18px rgba(8, 6, 19, .28);
+}
+
+:root[data-ui-theme="dark"] .card-theme-option.selected:hover {
+  box-shadow: inset 0 0 0 1px rgba(229, 222, 255, .3), 0 12px 24px rgba(8, 6, 19, .34);
+}
+
+:root[data-ui-theme="dark"] .card-theme-option.selected strong { color: #fff; }
+
 :root[data-ui-theme="dark"] .segmented small,
-:root[data-ui-theme="dark"] .settings-category-nav button small,
 :root[data-ui-theme="dark"] .card-theme-option small { color: #bcb5d0; }
 :root[data-ui-theme="dark"] .segmented button.selected small,
-:root[data-ui-theme="dark"] .settings-category-nav button.selected small,
 :root[data-ui-theme="dark"] .card-theme-option.selected small { color: #e7e1ff; }
-:root[data-ui-theme="dark"] .settings-category-nav button.selected strong { color: #fff; }
+:root[data-ui-theme="dark"] .settings-category-nav { border-color: #3b3858; background: #1d1c30; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .035); }
+:root[data-ui-theme="dark"] .settings-category-nav button { color: #c5c0d9; }
+:root[data-ui-theme="dark"] .settings-category-nav button:hover:not(.selected) { color: #eeeaff; background: rgba(255, 255, 255, .055); box-shadow: 0 2px 7px rgba(5, 4, 13, .24); }
+:root[data-ui-theme="dark"] .settings-category-nav button.selected { color: #f4f1ff; border-color: #7569aa; background: #343052; box-shadow: inset 0 0 0 1px rgba(227, 220, 255, .1), 0 3px 9px rgba(5, 4, 13, .3); }
+:root[data-ui-theme="dark"] .settings-category-nav button.selected::after { background: #c3b8ff; }
 :root[data-ui-theme="dark"] .range-label input,
 :root[data-ui-theme="dark"] .check-label input { accent-color: var(--workbench-selected-border); }
 :root[data-ui-theme="dark"] .preview-panel { background: #111119; }

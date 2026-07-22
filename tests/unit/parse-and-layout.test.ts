@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_CONFIG, DENSITY_PRESETS } from '../../src/domain/document';
+import { STARTER_MARKDOWN } from '../../src/data/starter-markdown';
 import { createPagePlan } from '../../src/layout/paginate';
 import { parseMarkdown } from '../../src/parser/parse-markdown';
 import {
@@ -13,11 +14,15 @@ import {
 
 const fixture = readFileSync(resolve(import.meta.dirname, '../fixtures/technical.md'), 'utf8');
 const completeExample = readFileSync(
-  resolve(import.meta.dirname, '../../examples/complex-markdown/复杂排版与资源回归样例.md'),
+  resolve(import.meta.dirname, '../../examples/Md2Card Example.md'),
   'utf8',
 );
 
 describe('技术 Markdown 解析', () => {
+  it('新文章默认使用 macOS 浅色代码块外观', () => {
+    expect(DEFAULT_CONFIG.codeBlockAppearance).toBe('macos');
+  });
+
   it('保留表格、围栏代码、LaTex 方括号公式和手动分页', () => {
     const article = parseMarkdown(fixture);
     expect(article.title).toBe('技术内容回归样例');
@@ -40,19 +45,53 @@ describe('技术 Markdown 解析', () => {
     expect(plan.pages[1].fragments.some((fragment) => fragment.block.kind === 'heading')).toBe(true);
   });
 
-  it('将单独的 Markdown 图片保留为图片块，而不是丢失或变成 HTML', () => {
-    const article = parseMarkdown('# 图片\n\n![结构图](assets/diagram.png)');
-    expect(article.blocks[0]).toMatchObject({ kind: 'image', url: 'assets/diagram.png', alt: '结构图' });
+  it('将独立 Markdown 图片与其标题图注保留为同一个图片块', () => {
+    const article = parseMarkdown('# 图片\n\n![结构图](assets/diagram.png "图 1 · 结构关系")');
+    expect(article.blocks[0]).toMatchObject({
+      kind: 'image',
+      url: 'assets/diagram.png',
+      alt: '结构图',
+      caption: '图 1 · 结构关系',
+    });
+  });
+
+  it('将图片或表格后紧随的中文图注、表注并入前一个内容块', () => {
+    const article = parseMarkdown([
+      '# 图文',
+      '',
+      '![结构图](assets/diagram.png)',
+      '',
+      '图 1：结构关系。',
+      '',
+      '| 名称 | 说明 |',
+      '| --- | --- |',
+      '| A | B |',
+      '',
+      '表 1：变量对照。',
+    ].join('\n'));
+    expect(article.blocks).toHaveLength(2);
+    expect(article.blocks[0]).toMatchObject({ kind: 'image', caption: '图 1：结构关系。' });
+    expect(article.blocks[1]).toMatchObject({ kind: 'table', caption: '表 1：变量对照。' });
   });
 
   it('项目自带完整样例覆盖图片、公式、表格、代码和显式分页', () => {
     const article = parseMarkdown(completeExample);
-    expect(article.title).toContain('md2card 产品能力演示');
+    expect(article.title).toContain('md2card 排版展示');
     expect(article.blocks.filter((block) => block.kind === 'image')).toHaveLength(3);
     expect(article.blocks.some((block) => block.kind === 'math')).toBe(true);
     expect(article.blocks.some((block) => block.kind === 'table')).toBe(true);
     expect(article.blocks.some((block) => block.kind === 'code')).toBe(true);
     expect(article.blocks.some((block) => block.kind === 'pageBreak')).toBe(true);
+  });
+
+  it('首次打开的内置演示稿无需图片权限且可展示多页技术内容', () => {
+    const article = parseMarkdown(STARTER_MARKDOWN);
+    expect(article.title).toContain('md2card');
+    expect(article.blocks.some((block) => block.kind === 'image')).toBe(false);
+    expect(article.blocks.filter((block) => block.kind === 'pageBreak')).toHaveLength(4);
+    expect(article.blocks.some((block) => block.kind === 'math')).toBe(true);
+    expect(article.blocks.some((block) => block.kind === 'table')).toBe(true);
+    expect(article.blocks.some((block) => block.kind === 'code')).toBe(true);
   });
 
   it('将超高表格按行续页，并在续页中重复表头', () => {

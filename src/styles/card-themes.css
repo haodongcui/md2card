@@ -339,6 +339,23 @@
   font-variant-numeric: tabular-nums;
 }
 
+.card-page .table-card,
+.measure-stage .table-card {
+  margin: 0;
+}
+
+.card-page .table-card figcaption,
+.measure-stage .table-card figcaption {
+  margin: 13px 3px 1px;
+  padding: 11px 3px 0;
+  border-top: 1px solid var(--theme-outline-variant);
+  color: var(--theme-on-surface-variant);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.55;
+  text-align: left;
+}
+
 .card-page .math-display,
 .measure-stage .math-display {
   padding: 15px 10px;
@@ -365,7 +382,13 @@
 
 .card-page .image-card figcaption,
 .measure-stage .image-card figcaption {
+  margin: 13px 3px 1px;
+  padding: 11px 3px 0;
+  border-top: 1px solid var(--theme-outline-variant);
   color: var(--theme-on-surface-variant);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.55;
 }
 
 .card-page .image-missing,
