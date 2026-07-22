@@ -1,0 +1,20 @@
+/* Theme-picker swatches portray the card grammar rather than a single color. */
+.card-theme-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.card-theme-option.theme-minimal .card-theme-swatch {
+  background: linear-gradient(135deg, #ffffff 0 64%, #303030 64%);
+}
+
+.card-theme-option.theme-editorial .card-theme-swatch {
+  background: radial-gradient(circle at 100% 0%, #e3d6f6 0 34%, transparent 35%), #fcf9ff;
+}
+
+.card-theme-option.theme-notebook .card-theme-swatch {
+  background: radial-gradient(circle at 100% 0%, #b9dcc4 0 34%, transparent 35%), #f4faf5;
+}
+
+.card-theme-option.theme-research .card-theme-swatch {
+  background-color: #f2fafb;
+  background-image: linear-gradient(rgba(23, 102, 124, .2) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 102, 124, .2) 1px, transparent 1px);
+  background-size: 7px 7px;
+}

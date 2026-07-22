@@ -1,0 +1,73 @@
+/* 雾蓝实验室: preserve the strongest existing direction, but confine the
+ * grid to the cover and keep the reading surface almost neutral. */
+.theme-research {
+  --theme-surface: #f8fcfd;
+  --theme-surface-container-low: #eff7f8;
+  --theme-surface-container: #e2f0f3;
+  --theme-surface-container-high: #d5e7eb;
+  --theme-on-surface: #17343e;
+  --theme-on-surface-variant: #587078;
+  --theme-primary: #17667c;
+  --theme-primary-container: #c3eaf4;
+  --theme-on-primary-container: #063542;
+  --theme-outline: #71878e;
+  --theme-outline-variant: #c6dce1;
+  --theme-code-surface: #f5fafb;
+  --theme-code-toolbar: #e3f0f3;
+  --theme-table-surface: #edf6f8;
+  --theme-table-header: #dcecf0;
+  --theme-table-row-odd: #f7fbfc;
+  --theme-table-row-even: #eef6f7;
+  --theme-table-shadow: 4px 7px 16px rgba(24, 83, 102, .045);
+  --theme-math-surface: #f1f8f9;
+  --theme-syntax-comment: #6e7f83;
+  --theme-syntax-keyword: #266d86;
+  --theme-syntax-string: #33775e;
+  --theme-syntax-function: #2f6688;
+  --theme-syntax-number: #8a6227;
+  --shape-technical: 6px;
+  --shape-container: 10px;
+  --shape-cover: 12px;
+  --heading-marker-width: 96px;
+  --cover-decoration: transparent;
+}
+
+.card-page.theme-research {
+  background: #f8fcfd;
+  background-image: radial-gradient(circle at 100% 0%, rgba(23, 102, 124, .08), transparent 25%);
+}
+
+.theme-research .card-cover {
+  border-color: #bfd7dd;
+  background-color: #f2fafb;
+  background-image: linear-gradient(rgba(23, 102, 124, .075) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 102, 124, .075) 1px, transparent 1px);
+  background-size: 38px 38px;
+}
+
+.theme-research .card-cover-decoration {
+  right: 24px;
+  top: 21px;
+  width: 70px;
+  height: 70px;
+  border: 2px solid #79a6b3;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, .26);
+  transform: rotate(13deg);
+}
+
+.theme-research .card-cover-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-research .card-cover-kicker::before {
+  content: '';
+  width: 22px;
+  height: 3px;
+  background: var(--theme-primary);
+}
+
+.theme-research .heading.depth-3 { color: var(--theme-primary); }
+.theme-research .heading.depth-3::before { background: #7ba8b5; }
+.theme-research .table-frame th { background: var(--theme-table-header); }

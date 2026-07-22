@@ -1,0 +1,93 @@
+/* macOS 编辑器：这是独立的代码块外观，而非新的整张卡片主题。
+ * 以银灰窗口栏和白色编辑区呼应 macOS 的浅色外观；外层卡片仍完整保留所选模板。
+ * CardPage 和 MeasureStage 同时带上 code-appearance-*，因此额外的窗口栏
+ * 高度会进入真实测量和分页。 */
+.card-page.code-appearance-macos .code-card,
+.measure-stage.code-appearance-macos .code-card {
+  --theme-syntax-comment: #7d8491;
+  --theme-syntax-keyword: #8a4fa6;
+  --theme-syntax-string: #287553;
+  --theme-syntax-function: #166d9a;
+  --theme-syntax-number: #a26022;
+  overflow: hidden;
+  border-color: #c9cbd2;
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 7px 9px 20px rgba(47, 50, 62, .12), inset 0 1px 0 rgba(255, 255, 255, .92);
+}
+
+.card-page.code-appearance-macos .code-toolbar,
+.measure-stage.code-appearance-macos .code-toolbar {
+  height: 44px;
+  grid-template-columns: minmax(104px, 1fr) auto minmax(104px, 1fr);
+  gap: 12px;
+  padding: 0 17px;
+  border-bottom-color: #d0d2d8;
+  color: #6e7380;
+  background: linear-gradient(180deg, #f5f5f7 0%, #e7e7eb 100%);
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: .025em;
+}
+
+.card-page.code-appearance-macos .code-window-controls,
+.measure-stage.code-appearance-macos .code-window-controls {
+  display: inline-flex;
+  grid-column: 1;
+  align-items: center;
+  gap: 7px;
+}
+
+.card-page.code-appearance-macos .code-window-dot,
+.measure-stage.code-appearance-macos .code-window-dot {
+  width: 11px;
+  height: 11px;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, .16);
+  border-radius: 50%;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .28);
+}
+
+.card-page.code-appearance-macos .code-window-dot:nth-child(1),
+.measure-stage.code-appearance-macos .code-window-dot:nth-child(1) { background: #ff6159; }
+.card-page.code-appearance-macos .code-window-dot:nth-child(2),
+.measure-stage.code-appearance-macos .code-window-dot:nth-child(2) { background: #ffbd2e; }
+.card-page.code-appearance-macos .code-window-dot:nth-child(3),
+.measure-stage.code-appearance-macos .code-window-dot:nth-child(3) { background: #28c941; }
+
+.card-page.code-appearance-macos .code-language,
+.measure-stage.code-appearance-macos .code-language {
+  grid-column: 2;
+  color: #4c515d;
+  font-weight: 720;
+  letter-spacing: .035em;
+}
+
+.card-page.code-appearance-macos .code-meta,
+.measure-stage.code-appearance-macos .code-meta {
+  grid-column: 3;
+  color: #777d89;
+}
+
+.card-page.code-appearance-macos .code-card pre,
+.measure-stage.code-appearance-macos .code-card pre {
+  padding: 22px 24px;
+  color: #2d313b;
+  background: #ffffff;
+  line-height: 1.62;
+}
+
+.card-page.code-appearance-macos .code-lines,
+.measure-stage.code-appearance-macos .code-lines { padding-left: 62px !important; }
+
+.card-page.code-appearance-macos .code-line-list li::marker,
+.measure-stage.code-appearance-macos .code-line-list li::marker { color: #959aa5; }
+
+.card-page.code-appearance-macos .token.punctuation,
+.card-page.code-appearance-macos .token.operator,
+.card-page.code-appearance-macos .token.entity,
+.card-page.code-appearance-macos .token.url,
+.measure-stage.code-appearance-macos .token.punctuation,
+.measure-stage.code-appearance-macos .token.operator,
+.measure-stage.code-appearance-macos .token.entity,
+.measure-stage.code-appearance-macos .token.url { color: #575e6c; }

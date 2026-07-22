@@ -1,0 +1,69 @@
+/* 雾松笔记: a clear pine-green tonal composition. It remains distinct from
+ * the purple and blue laboratory themes without returning to hand-note
+ * paper, terracotta, yellow, or coffee-shop brown. */
+.theme-notebook {
+  --theme-surface: #f8fcf8;
+  --theme-surface-container-low: #f0f7f1;
+  --theme-surface-container: #dfece2;
+  --theme-surface-container-high: #d2e3d5;
+  --theme-on-surface: #18352a;
+  --theme-on-surface-variant: #506a5b;
+  --theme-primary: #356c59;
+  --theme-primary-container: #c3eed5;
+  --theme-on-primary-container: #083821;
+  --theme-outline: #708477;
+  --theme-outline-variant: #c7d8cb;
+  --theme-code-surface: #f5faf5;
+  --theme-code-toolbar: #e3efe4;
+  --theme-table-surface: #eef6ef;
+  --theme-table-header: #dceade;
+  --theme-table-row-odd: #f8fcf8;
+  --theme-table-row-even: #eff7f0;
+  --theme-table-shadow: 4px 7px 16px rgba(28, 69, 47, .045);
+  --theme-math-surface: #f3f9f4;
+  --theme-syntax-comment: #718078;
+  --theme-syntax-keyword: #2f6a56;
+  --theme-syntax-string: #34775b;
+  --theme-syntax-function: #38637e;
+  --theme-syntax-number: #875d20;
+  --shape-technical: 8px;
+  --shape-container: 14px;
+  --shape-cover: 28px;
+  --heading-marker-width: 86px;
+  --heading-marker-height: 6px;
+  --cover-decoration: #b9dcc4;
+}
+
+.card-page.theme-notebook {
+  background: #f8fcf8;
+  background-image: radial-gradient(circle at 100% 0%, rgba(53, 108, 89, .10), transparent 26%);
+}
+
+.theme-notebook .card-cover {
+  border-color: #c8dccd;
+  background: linear-gradient(135deg, #f9fdf9 0%, #e6f2e8 100%);
+}
+
+.theme-notebook .card-cover-decoration {
+  right: -34px;
+  top: -46px;
+  width: 196px;
+  height: 196px;
+  background: #b9dcc4;
+  opacity: .72;
+}
+
+.theme-notebook .card-cover-kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .62);
+  letter-spacing: .1em;
+}
+
+.theme-notebook .heading.depth-2::after { border-radius: 999px; }
+.theme-notebook .heading.depth-3 { color: var(--theme-primary); }
+.theme-notebook .heading.depth-3::before { border-radius: 999px; background: var(--theme-primary); }
+.theme-notebook .table-frame th { background: var(--theme-table-header); }
+.theme-notebook .card-content.cover-only .card-cover { padding: 76px 62px; }

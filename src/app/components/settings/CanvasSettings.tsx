@@ -1,0 +1,13 @@
+import type { LayoutConfig } from "../../../domain/document";
+
+type UpdateConfig = <Key extends keyof LayoutConfig>(key: Key, value: LayoutConfig[Key]) => void;
+
+export function CanvasSettings({ config, articleName, onConfigChange, onEditArticle }: { config: LayoutConfig; articleName: string; onConfigChange: UpdateConfig; onEditArticle: () => void }) {
+  return <section class="settings-category-content">
+    <h3>画布</h3><h4>画布比例</h4><div class="segmented"><button class={config.ratio === "3:4" ? "selected" : ""} onClick={() => onConfigChange("ratio", "3:4")}>3:4<br /><small>标准卡片</small></button><button class={config.ratio === "2:3" ? "selected" : ""} onClick={() => onConfigChange("ratio", "2:3")}>2:3<br /><small>技术长图</small></button></div>
+    <h4>首卡封面</h4><p class="field-help">融合首页只在第一张卡片展示文章名；标题区域会参与分页，后续卡片不会重复显示。</p><div class="segmented cover-mode-control"><button type="button" class={config.coverMode === "integrated" ? "selected" : ""} onClick={() => onConfigChange("coverMode", "integrated")}>融合首页<br /><small>推荐</small></button><button type="button" class={config.coverMode === "standalone" ? "selected" : ""} onClick={() => onConfigChange("coverMode", "standalone")}>独立封面</button><button type="button" class={config.coverMode === "none" ? "selected" : ""} onClick={() => onConfigChange("coverMode", "none")}>无封面</button></div>
+    {config.coverMode !== "none" && <><p class="cover-title-source">封面标题：<strong title={articleName}>{articleName}</strong><button type="button" onClick={onEditArticle}>到编辑区修改</button></p><div class="cover-copy-fields"><label class="text-field">封面标签（可选）<input value={config.coverKicker} placeholder="例如：技术笔记" onInput={(event) => onConfigChange("coverKicker", event.currentTarget.value)} /></label><label class="text-field">副标题（可选）<input value={config.coverSubtitle} placeholder="一句话说明文章内容" onInput={(event) => onConfigChange("coverSubtitle", event.currentTarget.value)} /></label></div></>}
+    <h4>画布留白</h4><div class="setting-control-grid"><label class="range-label">左右安全边距 <output>{config.cardHorizontalPadding}px</output><input type="range" min="60" max="92" step="2" value={config.cardHorizontalPadding} onInput={(event) => onConfigChange("cardHorizontalPadding", Number(event.currentTarget.value))} /></label><label class="range-label">上下安全留白 <output>{config.cardVerticalPadding}px</output><input type="range" min="50" max="88" step="2" value={config.cardVerticalPadding} onInput={(event) => onConfigChange("cardVerticalPadding", Number(event.currentTarget.value))} /></label></div>
+    <h4>页码</h4><label class="check-label"><input type="checkbox" checked={config.showPageNumber} onChange={(event) => onConfigChange("showPageNumber", event.currentTarget.checked)} /> 显示右下角页码</label>
+  </section>;
+}

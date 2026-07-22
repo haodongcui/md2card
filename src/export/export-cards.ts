@@ -59,7 +59,7 @@ export async function exportCards({
     await new Promise<void>((resolve) => window.setTimeout(resolve, 0));
   }
 
-  files['README.txt'] = strToU8('由 md2card 在本地浏览器生成。每个 .png 已通过 PNG 文件头校验。\n');
+  files['README.txt'] = strToU8('由 Md2Card 在本地浏览器生成。每个 .png 已通过 PNG 文件头校验。\n');
   const archive = zipSync(files, { level: 6 });
   download(new Blob([archive], { type: 'application/zip' }), `${filename || 'md2card-cards'}.zip`);
 }

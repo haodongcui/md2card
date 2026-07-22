@@ -7,11 +7,11 @@ const TICK = '`';
  * integration example, while this article demonstrates the rest of the card
  * system in a few immediately readable pages.
  */
-export const STARTER_MARKDOWN = String.raw`# md2card：让技术 Markdown 成为可发布的图片卡片
+export const STARTER_MARKDOWN = String.raw`# Md2Card：让技术 Markdown 成为可发布的图片卡片
 
 > **纯前端、本地处理、预览即导出。** 这是一篇首次打开工作台就能完整阅读的产品演示：不需要上传文件，也不需要先授予图片目录权限。
 
-md2card 面向包含公式、表格、代码和多级标题的技术笔记。它不把文章机械截断，而是根据真实卡片尺寸重新组织阅读节奏；右侧预览看到的内容，就是之后导出的 PNG。
+Md2Card 面向包含公式、表格、代码和多级标题的技术笔记。它不把文章机械截断，而是根据真实卡片尺寸重新组织阅读节奏；右侧预览看到的内容，就是之后导出的 PNG。
 
 ## 01 · 从一篇 Markdown 开始
 
@@ -34,7 +34,7 @@ md2card 面向包含公式、表格、代码和多级标题的技术笔记。它
 
 技术笔记里，中文说明、English terms、${TICK}inline_code()${TICK} 与行内公式常常同时出现。例如信噪比可以写作 $\mathrm{SNR}=10\log_{10}(P_s/P_n)$，而不应迫使整段文字为一条公式让步。
 
-对于独立公式，md2card 使用 KaTeX 渲染，并允许单独缩放：
+对于独立公式，Md2Card 使用 KaTeX 渲染，并允许单独缩放：
 
 $$
 \begin{aligned}
@@ -51,7 +51,7 @@ $$
 
 ## 03 · 表格需要自己的收纳方式
 
-宽表格在卡片里最容易破坏阅读宽度。md2card 让表格使用独立字号；表格过高时按行续页并重复表头，而不是裁掉底部信息。
+宽表格在卡片里最容易破坏阅读宽度。Md2Card 让表格使用独立字号；表格过高时按行续页并重复表头，而不是裁掉底部信息。
 
 | 阶段 | 输入 | 输出 | 关键检查 | 常见问题 |
 | --- | --- | --- | --- | --- |

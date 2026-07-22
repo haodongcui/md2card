@@ -1,0 +1,51 @@
+/* 纯净排版: the formal default. The white page and neutral rules stay out of
+ * the way while still giving code and tables enough technical distinction. */
+.theme-minimal {
+  --theme-surface: #ffffff;
+  --theme-surface-container-low: #fafafa;
+  --theme-surface-container: #f5f5f5;
+  --theme-surface-container-high: #eeeeee;
+  --theme-on-surface: #1f1f1f;
+  --theme-on-surface-variant: #666666;
+  --theme-primary: #303030;
+  --theme-primary-container: #e9e9e9;
+  --theme-on-primary-container: #1f1f1f;
+  --theme-outline: #8a8a8a;
+  --theme-outline-variant: #dedede;
+  --theme-code-surface: #fafafa;
+  --theme-code-toolbar: #f3f3f3;
+  --theme-table-surface: #fafafa;
+  --theme-table-header: #f0f0f0;
+  --theme-table-row-odd: #ffffff;
+  --theme-table-row-even: #f7f7f7;
+  --theme-syntax-comment: #767676;
+  --theme-syntax-keyword: #4d4d4d;
+  --theme-syntax-string: #456a55;
+  --theme-syntax-function: #425c79;
+  --theme-syntax-number: #735627;
+  --shape-technical: 5px;
+  --shape-container: 0;
+  --shape-cover: 0;
+  --heading-marker-radius: 0;
+}
+
+.card-page.theme-minimal { background: #ffffff; background-image: none; }
+.theme-minimal .card-cover {
+  min-height: 174px;
+  padding: 16px 0 30px;
+  border: 0;
+  border-bottom: 1px solid #303030;
+  border-radius: 0;
+  background: transparent;
+}
+.theme-minimal .card-cover-decoration { display: none; }
+.theme-minimal .card-cover-title { max-width: 100%; }
+.theme-minimal .card-content.cover-only .card-cover { padding: 64px 0; border-bottom-width: 2px; }
+.theme-minimal .heading.depth-2::after { background: #303030; }
+.theme-minimal .heading.depth-3 { color: #4d4d4d; }
+.theme-minimal .heading.depth-3::before { background: #bdbdbd; }
+.theme-minimal blockquote { border-left-color: #777777; background: transparent; border-radius: 0; }
+.theme-minimal .table-frame { border-color: #dadada; border-radius: 0; background: var(--theme-table-surface); box-shadow: none; }
+.theme-minimal .table-frame th { border-bottom: 1px solid #555555; background: var(--theme-table-header); }
+.theme-minimal .code-card { border-color: #dedede; background: #fafafa; box-shadow: none; }
+.theme-minimal .code-toolbar { background: #f3f3f3; border-bottom-color: #dedede; }

@@ -1,0 +1,499 @@
+/*
+ * Export-card design system
+ *
+ * The Markdown geometry lives here as shared, semantic component rules. Theme
+ * classes only provide roles (surface, content, emphasis, outline, shape) and
+ * a small number of deliberate signatures. CardPage and MeasureStage receive
+ * the same classes, so every visual height remains part of pagination.
+ */
+
+.card-page,
+.measure-stage {
+  --theme-surface: #ffffff;
+  --theme-surface-container-low: #fafafa;
+  --theme-surface-container: #f4f4f4;
+  --theme-surface-container-high: #eeeeee;
+  --theme-on-surface: #1f1f1f;
+  --theme-on-surface-variant: #666666;
+  --theme-primary: #303030;
+  --theme-primary-container: #e9e9e9;
+  --theme-on-primary-container: #1f1f1f;
+  --theme-outline: #808080;
+  --theme-outline-variant: #dddddd;
+  --theme-code-surface: #fafafa;
+  --theme-code-toolbar: #f3f3f3;
+  --theme-table-surface: #fafafa;
+  --theme-table-header: #eeeeee;
+  --theme-table-row-odd: #fdfdfd;
+  --theme-table-row-even: #f5f5f5;
+  --theme-table-shadow: none;
+  --theme-math-surface: transparent;
+  --theme-syntax-comment: #757178;
+  --theme-syntax-keyword: #5d5d5d;
+  --theme-syntax-string: #3f755f;
+  --theme-syntax-function: #35677a;
+  --theme-syntax-number: #8a5b25;
+  --shape-technical: 6px;
+  --shape-container: 12px;
+  --shape-cover: 16px;
+  --heading-marker-width: 112px;
+  --heading-marker-height: 4px;
+  --heading-h3-marker-width: 4px;
+  --cover-decoration: transparent;
+  --cover-decoration-border: transparent;
+  --font-code: "JetBrains Mono Variable", "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  color: var(--theme-on-surface);
+  /* Latin glyphs use Times New Roman first; CJK glyphs fall back to the
+   * bundled Noto Sans SC. Code and KaTeX declare their own families below. */
+  font-family: "Times New Roman", "Nimbus Roman No9 L", "Liberation Serif", "Noto Sans SC Variable", "Noto Sans SC", "Microsoft YaHei", serif;
+}
+
+/* Shared reading grammar: hierarchy comes from roles and rhythm, never from a
+ * different decorative device for every Markdown block. */
+.card-page .card-content,
+.measure-stage .card-content {
+  color: var(--theme-on-surface);
+}
+
+.card-page .content-block strong,
+.measure-stage .content-block strong {
+  color: var(--theme-on-surface);
+  font-weight: 780;
+}
+
+.card-page .content-block em,
+.measure-stage .content-block em {
+  color: var(--theme-on-surface-variant);
+}
+
+.card-page .content-block a,
+.measure-stage .content-block a {
+  color: var(--theme-primary);
+  text-decoration-color: var(--theme-primary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .17em;
+}
+
+.card-page .heading,
+.measure-stage .heading {
+  color: var(--theme-on-surface);
+  font-weight: 740;
+  letter-spacing: -.038em;
+}
+
+.card-page .heading.depth-2,
+.measure-stage .heading.depth-2 {
+  position: relative;
+  padding: 0 0 19px;
+  border: 0;
+  font-size: var(--heading-2);
+  line-height: 1.23;
+}
+
+.card-page .heading.depth-2::after,
+.measure-stage .heading.depth-2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: var(--heading-marker-width);
+  height: var(--heading-marker-height);
+  border-radius: var(--heading-marker-radius, 999px);
+  background: var(--theme-primary);
+}
+
+.card-page .heading.depth-3,
+.measure-stage .heading.depth-3 {
+  position: relative;
+  padding-left: 18px;
+  font-size: var(--heading-3);
+  line-height: 1.31;
+}
+
+.card-page .heading.depth-3::before,
+.measure-stage .heading.depth-3::before {
+  content: '';
+  position: absolute;
+  top: .2em;
+  bottom: .2em;
+  left: 0;
+  width: var(--heading-h3-marker-width);
+  border-radius: var(--heading-marker-radius, 999px);
+  background: var(--theme-primary-container);
+}
+
+.card-page .heading.depth-4,
+.card-page .heading.depth-5,
+.card-page .heading.depth-6,
+.measure-stage .heading.depth-4,
+.measure-stage .heading.depth-5,
+.measure-stage .heading.depth-6 {
+  color: var(--theme-on-surface);
+  font-size: 30px;
+  font-weight: 720;
+  line-height: 1.4;
+  letter-spacing: -.02em;
+}
+
+.card-page .inline-code,
+.measure-stage .inline-code {
+  padding: .08em .36em;
+  border: 1px solid var(--theme-outline-variant);
+  border-radius: var(--shape-technical);
+  color: var(--theme-primary);
+  background: var(--theme-surface-container-low);
+  font-family: var(--font-code);
+}
+
+.card-page .inline-math,
+.measure-stage .inline-math {
+  color: var(--theme-on-surface);
+}
+
+.card-page .markdown-list,
+.measure-stage .markdown-list {
+  padding-left: 1.48em;
+}
+
+.card-page .markdown-list li,
+.measure-stage .markdown-list li {
+  padding-left: .2em;
+  margin: .22em 0;
+}
+
+.card-page .markdown-list li::marker,
+.measure-stage .markdown-list li::marker {
+  color: var(--theme-primary);
+  font-weight: 800;
+}
+
+.card-page blockquote,
+.measure-stage blockquote {
+  padding: 17px 22px;
+  border: 0;
+  border-left: 5px solid var(--theme-primary);
+  border-radius: 0 var(--shape-container) var(--shape-container) 0;
+  color: var(--theme-on-surface-variant);
+  background: var(--theme-surface-container-low);
+  box-shadow: none;
+}
+
+.card-page hr,
+.measure-stage hr {
+  width: 28%;
+  height: 1px;
+  margin: 14px auto;
+  background: var(--theme-outline-variant);
+}
+
+.card-page .code-card,
+.measure-stage .code-card {
+  border: 1px solid var(--theme-outline-variant);
+  border-radius: var(--shape-technical);
+  background: var(--theme-code-surface);
+  box-shadow: none;
+}
+
+.card-page .code-toolbar,
+.measure-stage .code-toolbar {
+  height: 38px;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  color: var(--theme-on-surface-variant);
+  background: var(--theme-code-toolbar);
+  border-bottom: 1px solid var(--theme-outline-variant);
+  font-size: 16px;
+  letter-spacing: .02em;
+  font-family: var(--font-code);
+}
+
+.card-page .code-window-controls,
+.measure-stage .code-window-controls {
+  display: none;
+}
+
+.card-page .code-language,
+.measure-stage .code-language {
+  grid-column: 1;
+  color: var(--theme-primary);
+  font-weight: 760;
+  text-transform: lowercase;
+}
+
+.card-page .code-meta,
+.measure-stage .code-meta {
+  grid-column: 3;
+  justify-self: end;
+  color: var(--theme-on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+
+.card-page .code-card pre,
+.measure-stage .code-card pre {
+  padding: 20px 22px;
+  color: var(--theme-on-surface);
+  line-height: 1.58;
+  font-family: var(--font-code);
+}
+
+.card-page .code-lines,
+.measure-stage .code-lines {
+  padding-left: 58px !important;
+}
+
+.card-page .code-line-list li::marker,
+.measure-stage .code-line-list li::marker {
+  color: var(--theme-on-surface-variant);
+}
+
+.card-page .token.comment,
+.card-page .token.prolog,
+.card-page .token.doctype,
+.card-page .token.cdata,
+.measure-stage .token.comment,
+.measure-stage .token.prolog,
+.measure-stage .token.doctype,
+.measure-stage .token.cdata { color: var(--theme-syntax-comment); }
+.card-page .token.property,
+.card-page .token.tag,
+.card-page .token.constant,
+.card-page .token.symbol,
+.card-page .token.deleted,
+.measure-stage .token.property,
+.measure-stage .token.tag,
+.measure-stage .token.constant,
+.measure-stage .token.symbol,
+.measure-stage .token.deleted { color: var(--theme-syntax-keyword); }
+.card-page .token.boolean,
+.card-page .token.number,
+.measure-stage .token.boolean,
+.measure-stage .token.number { color: var(--theme-syntax-number); }
+.card-page .token.selector,
+.card-page .token.attr-name,
+.card-page .token.string,
+.card-page .token.char,
+.card-page .token.builtin,
+.card-page .token.inserted,
+.measure-stage .token.selector,
+.measure-stage .token.attr-name,
+.measure-stage .token.string,
+.measure-stage .token.char,
+.measure-stage .token.builtin,
+.measure-stage .token.inserted { color: var(--theme-syntax-string); }
+.card-page .token.atrule,
+.card-page .token.attr-value,
+.card-page .token.keyword,
+.measure-stage .token.atrule,
+.measure-stage .token.attr-value,
+.measure-stage .token.keyword { color: var(--theme-syntax-keyword); }
+.card-page .token.function,
+.card-page .token.class-name,
+.measure-stage .token.function,
+.measure-stage .token.class-name { color: var(--theme-syntax-function); }
+
+.card-page .table-frame,
+.measure-stage .table-frame {
+  overflow: hidden;
+  border: 1px solid var(--theme-outline-variant);
+  border-radius: var(--shape-container);
+  background: var(--theme-table-surface);
+  box-shadow: var(--theme-table-shadow);
+  line-height: 1.48;
+}
+
+.card-page .table-frame th,
+.card-page .table-frame td,
+.measure-stage .table-frame th,
+.measure-stage .table-frame td {
+  padding: 12px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--theme-outline-variant);
+}
+
+.card-page .table-frame th,
+.measure-stage .table-frame th {
+  color: var(--theme-on-surface);
+  background: var(--theme-table-header);
+  font-weight: 780;
+}
+
+.card-page .table-frame tbody tr:nth-child(odd),
+.measure-stage .table-frame tbody tr:nth-child(odd) {
+  background: var(--theme-table-row-odd);
+}
+
+.card-page .table-frame tbody tr:nth-child(even),
+.measure-stage .table-frame tbody tr:nth-child(even) {
+  background: var(--theme-table-row-even);
+}
+
+.card-page .table-frame tr:last-child td,
+.measure-stage .table-frame tr:last-child td {
+  border-bottom: 0;
+}
+
+.card-page .table-cell-align-right,
+.measure-stage .table-cell-align-right {
+  font-variant-numeric: tabular-nums;
+}
+
+.card-page .table-card,
+.measure-stage .table-card {
+  margin: 0;
+}
+
+.card-page .table-card figcaption,
+.measure-stage .table-card figcaption {
+  margin: 13px 3px 1px;
+  padding: 11px 3px 0;
+  border-top: 1px solid var(--theme-outline-variant);
+  color: var(--theme-on-surface-variant);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.card-page .math-display,
+.measure-stage .math-display {
+  padding: 15px 10px;
+  border: 0;
+  border-radius: 0;
+  color: var(--theme-on-surface);
+  background: transparent;
+  text-align: center;
+}
+
+.card-page .image-card,
+.measure-stage .image-card {
+  padding: 12px;
+  border: 1px solid var(--theme-outline-variant);
+  border-radius: var(--shape-container);
+  background: var(--theme-surface-container-low);
+}
+
+.card-page .image-card img,
+.measure-stage .image-card img {
+  border-radius: var(--shape-technical);
+  background: var(--theme-surface-container);
+}
+
+.card-page .image-card figcaption,
+.measure-stage .image-card figcaption {
+  margin: 13px 3px 1px;
+  padding: 11px 3px 0;
+  border-top: 1px solid var(--theme-outline-variant);
+  color: var(--theme-on-surface-variant);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.card-page .image-missing,
+.measure-stage .image-missing {
+  border-color: var(--theme-outline);
+  border-radius: var(--shape-container);
+  color: var(--theme-on-surface-variant);
+  background: var(--theme-surface-container-low);
+}
+
+.card-page .continuation-label,
+.measure-stage .continuation-label {
+  padding: 4px 10px;
+  border-radius: var(--shape-technical);
+  color: var(--theme-on-primary-container);
+  background: var(--theme-primary-container);
+  font-size: 17px;
+  font-weight: 760;
+}
+
+.card-page .card-footer {
+  border-color: var(--theme-outline-variant);
+  color: var(--theme-on-surface-variant);
+}
+
+.card-page .page-number {
+  color: var(--theme-primary);
+  font-family: var(--font-code);
+  font-variant-numeric: tabular-nums;
+}
+
+.card-page .card-cover,
+.measure-stage .card-cover {
+  min-height: 206px;
+  padding: 30px 34px 32px;
+  border: 1px solid var(--theme-outline-variant);
+  border-radius: var(--shape-cover);
+  color: var(--theme-on-surface);
+  background: var(--theme-surface-container-low);
+  box-shadow: none;
+}
+
+.card-page .card-cover-decoration,
+.measure-stage .card-cover-decoration {
+  right: -42px;
+  top: -42px;
+  width: 170px;
+  height: 170px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--cover-decoration);
+  opacity: 1;
+}
+
+.card-page .card-cover-kicker,
+.measure-stage .card-cover-kicker {
+  color: var(--theme-primary);
+  font-size: 17px;
+  font-weight: 780;
+  letter-spacing: .13em;
+}
+
+.card-page .card-cover-title,
+.measure-stage .card-cover-title {
+  color: var(--theme-on-surface);
+  font-size: 68px;
+  font-weight: 760;
+  line-height: 1.1;
+  letter-spacing: -.052em;
+}
+
+.card-page .card-cover.cover-title-long .card-cover-title,
+.measure-stage .card-cover.cover-title-long .card-cover-title {
+  font-size: 60px;
+}
+
+.card-page .card-cover.cover-title-xlong .card-cover-title,
+.measure-stage .card-cover.cover-title-xlong .card-cover-title {
+  font-size: 52px;
+}
+
+.card-page .card-cover-subtitle,
+.measure-stage .card-cover-subtitle {
+  color: var(--theme-on-surface-variant);
+  font-size: 23px;
+  line-height: 1.48;
+}
+
+.card-page .card-content.cover-only .card-cover,
+.measure-stage .card-content.cover-only .card-cover {
+  min-height: 100%;
+  padding: 72px 58px;
+}
+
+.card-page .card-content.cover-only .card-cover-title,
+.measure-stage .card-content.cover-only .card-cover-title {
+  font-size: 82px;
+}
+
+.card-page .card-content.cover-only .card-cover.cover-title-long .card-cover-title,
+.measure-stage .card-content.cover-only .card-cover.cover-title-long .card-cover-title {
+  font-size: 74px;
+}
+
+.card-page .card-content.cover-only .card-cover.cover-title-xlong .card-cover-title,
+.measure-stage .card-content.cover-only .card-cover.cover-title-xlong .card-cover-title {
+  font-size: 66px;
+}

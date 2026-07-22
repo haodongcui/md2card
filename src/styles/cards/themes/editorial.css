@@ -1,0 +1,91 @@
+/* 柔光浅紫: a light, modern tonal composition with a restrained Mac-style
+ * code toolbar. It replaces the previous wine editorial direction. */
+.theme-editorial {
+  --theme-surface: #fcf9ff;
+  --theme-surface-container-low: #f7f1ff;
+  --theme-surface-container: #eee5f8;
+  --theme-surface-container-high: #e5daf2;
+  --theme-on-surface: #201a2a;
+  --theme-on-surface-variant: #625b6a;
+  --theme-primary: #66558f;
+  --theme-primary-container: #e9ddff;
+  --theme-on-primary-container: #211235;
+  --theme-outline: #7c7488;
+  --theme-outline-variant: #d1c5dd;
+  --theme-code-surface: #fefcff;
+  --theme-code-toolbar: #f6f0fc;
+  --theme-table-surface: #f7f2fb;
+  --theme-table-header: #e9ddf3;
+  --theme-table-row-odd: #fbf8fd;
+  --theme-table-row-even: #f4eef9;
+  --theme-table-shadow: 4px 7px 16px rgba(57, 40, 88, .055);
+  --theme-math-surface: transparent;
+  --theme-syntax-comment: #78737e;
+  --theme-syntax-keyword: #66558f;
+  --theme-syntax-string: #3d755f;
+  --theme-syntax-function: #35677c;
+  --theme-syntax-number: #885a22;
+  --shape-technical: 6px;
+  --shape-container: 10px;
+  --shape-cover: 16px;
+  --heading-marker-radius: 0;
+  --cover-decoration: #e3d6f6;
+}
+
+.card-page.theme-editorial {
+  background: #fcf9ff;
+  background-image: radial-gradient(circle at 100% 0%, rgba(102, 85, 143, .10), transparent 26%);
+}
+
+.theme-editorial .card-cover {
+  padding-left: 38px;
+  border-left: 8px solid var(--theme-primary);
+  background: #fdfaff;
+}
+
+.theme-editorial .card-cover-decoration {
+  right: 0;
+  top: 0;
+  width: 116px;
+  height: 14px;
+  border-radius: 0;
+  background: var(--theme-primary);
+  opacity: .16;
+}
+
+.theme-editorial .heading.depth-3 { color: var(--theme-primary); }
+.theme-editorial .heading.depth-3::before { background: var(--theme-primary); }
+.theme-editorial .card-content.cover-only .card-cover { padding-left: 66px; border-left-width: 10px; }
+.theme-editorial .code-card {
+  border-color: #ded2ec;
+  background: #fefcff;
+  box-shadow: 0 8px 20px rgba(57, 40, 88, .06);
+}
+.theme-editorial .code-toolbar {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  background: #f6f0fc;
+  border-bottom-color: #e6dbf2;
+}
+.theme-editorial .code-window-controls {
+  display: inline-flex;
+  grid-column: 1;
+  align-items: center;
+  gap: 6px;
+}
+.theme-editorial .code-language { grid-column: 2; }
+.theme-editorial .code-window-dot {
+  width: 9px;
+  height: 9px;
+  display: block;
+  border-radius: 50%;
+}
+.theme-editorial .code-window-dot:nth-child(1) { background: #d99aa8; }
+.theme-editorial .code-window-dot:nth-child(2) { background: #d8bf84; }
+.theme-editorial .code-window-dot:nth-child(3) { background: #98bca5; }
+.theme-editorial .code-card pre { background: #fefcff; }
+.theme-editorial .table-frame {
+  border-color: #ded2ec;
+  background: var(--theme-table-surface);
+  box-shadow: var(--theme-table-shadow);
+}
+.theme-editorial .table-frame th { background: var(--theme-table-header); }

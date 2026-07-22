@@ -76,7 +76,7 @@ describe('技术 Markdown 解析', () => {
 
   it('项目自带完整样例覆盖图片、公式、表格、代码和显式分页', () => {
     const article = parseMarkdown(completeExample);
-    expect(article.title).toContain('md2card 排版展示');
+    expect(article.title).toContain('Md2Card 排版展示');
     expect(article.blocks.filter((block) => block.kind === 'image')).toHaveLength(3);
     expect(article.blocks.some((block) => block.kind === 'math')).toBe(true);
     expect(article.blocks.some((block) => block.kind === 'table')).toBe(true);
@@ -86,7 +86,7 @@ describe('技术 Markdown 解析', () => {
 
   it('首次打开的内置演示稿无需图片权限且可展示多页技术内容', () => {
     const article = parseMarkdown(STARTER_MARKDOWN);
-    expect(article.title).toContain('md2card');
+    expect(article.title).toContain('Md2Card');
     expect(article.blocks.some((block) => block.kind === 'image')).toBe(false);
     expect(article.blocks.filter((block) => block.kind === 'pageBreak')).toHaveLength(4);
     expect(article.blocks.some((block) => block.kind === 'math')).toBe(true);
