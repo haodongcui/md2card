@@ -42,7 +42,7 @@ export function WorkspaceHeader({
         <a class="brand" href="../" aria-label="返回 Md2Card 首页">
           <span class="brand-mark">M</span>
           <span>Md2Card</span>
-          <small>技术 Markdown 卡片</small>
+          <small>Markdown 转小红书图片</small>
         </a>
         <nav class="workspace-site-nav" aria-label="站点导航">
           <a class="workspace-home-link" href="../">首页</a>

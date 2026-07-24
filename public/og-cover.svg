@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Md2Card：把 Markdown 笔记变成小红书图片</title>
+  <desc id="description">Md2Card 的产品分享封面，展示 Markdown 笔记被整理为连续图片卡片。</desc>
+  <defs>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="18" stdDeviation="17" flood-color="#27233c" flood-opacity=".18"/></filter>
+    <filter id="soft-shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#27233c" flood-opacity=".16"/></filter>
+    <linearGradient id="panel" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#2b2942"/><stop offset="1" stop-color="#1e1d31"/></linearGradient>
+    <linearGradient id="blue-card" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#e9f6fa"/><stop offset="1" stop-color="#d3e9f1"/></linearGradient>
+    <linearGradient id="lilac-card" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f3effc"/><stop offset="1" stop-color="#dfd7f3"/></linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#faf9f6"/>
+  <circle cx="1034" cy="-30" r="220" fill="#eee9f8" opacity=".72"/>
+  <circle cx="468" cy="682" r="188" fill="#e6f2ee" opacity=".72"/>
+  <path d="M0 517C121 470 203 508 296 578L294 630H0Z" fill="#f6ede8"/>
+
+  <g font-family="Droid Sans Fallback, Noto Sans CJK SC, sans-serif">
+    <text x="60" y="118" fill="#b65043" font-size="13" font-weight="700" letter-spacing="2.1">A CALM WORKSPACE FOR MARKDOWN NOTES</text>
+    <text x="60" y="202" fill="#242329" font-size="56" font-weight="700" letter-spacing="-2">把 Markdown 笔记</text>
+    <text x="60" y="270" fill="#bd5144" font-size="56" font-weight="700" letter-spacing="-2">变成小红书图片</text>
+    <text x="60" y="324" fill="#55535b" font-size="19">导入一篇笔记，微调排版后，下载一组可直接发布的图片。</text>
+    <text x="60" y="354" fill="#55535b" font-size="19">公式、表格、代码与本地图片，也能各自保持清晰。</text>
+
+    <g transform="translate(60 398)">
+      <rect width="151" height="47" rx="12" fill="#bd5144"/>
+      <text x="21" y="30" fill="#fff" font-size="16" font-weight="700">打开工作台 →</text>
+      <text x="174" y="29" fill="#54515b" font-size="15" font-weight="700">全程本地处理</text>
+    </g>
+
+    <g fill="#bc5144" font-size="15" font-weight="600">
+      <circle cx="63" cy="485" r="3"/><text x="78" y="490" fill="#57545c">直接复用已有 Markdown</text>
+      <circle cx="63" cy="515" r="3"/><text x="78" y="520" fill="#57545c">自动分页，按页导出 PNG ZIP</text>
+      <circle cx="63" cy="545" r="3"/><text x="78" y="550" fill="#57545c">文章与图片始终留在浏览器中</text>
+    </g>
+  </g>
+
+  <g transform="translate(594 96)">
+    <rect width="546" height="447" rx="24" fill="url(#panel)"/>
+    <path d="M24 46H522" stroke="#4a465f" stroke-width="1"/>
+    <circle cx="28" cy="22" r="4" fill="#f18b78"/><circle cx="42" cy="22" r="4" fill="#eec877"/><circle cx="56" cy="22" r="4" fill="#7fc49a"/>
+    <text x="350" y="27" fill="#bbb4db" font-family="monospace" font-size="12">Md2Card / local workspace</text>
+
+    <g transform="translate(68 86) rotate(-4 126 155)">
+      <rect width="252" height="310" rx="16" fill="url(#blue-card)"/>
+      <text x="27" y="51" fill="#4582a0" font-family="Droid Sans Fallback, sans-serif" font-size="13" font-weight="700">学习笔记</text>
+      <text x="27" y="107" fill="#293e50" font-family="Georgia, serif" font-size="31" font-weight="700">把一篇笔记</text>
+      <text x="27" y="145" fill="#293e50" font-family="Georgia, serif" font-size="31" font-weight="700">整理成卡片</text>
+      <path d="M27 170H114" stroke="#4f9cb7" stroke-width="4" stroke-linecap="round"/>
+      <text x="27" y="213" fill="#527587" font-size="15">标题、正文、图片</text>
+      <text x="27" y="238" fill="#527587" font-size="15">拥有清晰的层级</text>
+      <text x="180" y="278" fill="#4b8aa6" font-size="12">01 / 06</text>
+    </g>
+
+    <g transform="translate(271 165) rotate(3 115 75)">
+      <rect width="224" height="148" rx="14" fill="#fffdfb"/>
+      <circle cx="22" cy="22" r="4" fill="#f18b78"/><circle cx="35" cy="22" r="4" fill="#eec877"/><circle cx="48" cy="22" r="4" fill="#7fc49a"/>
+      <text x="150" y="30" fill="#776f9e" font-family="monospace" font-size="10">markdown</text>
+      <text x="24" y="69" fill="#4a4754" font-size="16" font-weight="700">读书摘录</text>
+      <path d="M24 87H190" stroke="#ded8e7" stroke-width="3" stroke-linecap="round"/>
+      <path d="M24 102H170" stroke="#e5e0e9" stroke-width="3" stroke-linecap="round"/>
+      <path d="M24 117H112" stroke="#e5e0e9" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <g transform="translate(174 333) rotate(-1 135 48)">
+      <rect width="271" height="83" rx="13" fill="url(#lilac-card)"/>
+      <text x="24" y="29" fill="#78649c" font-size="12" font-weight="700">公式 · 表格 · 图片</text>
+      <text x="24" y="60" fill="#4d4760" font-family="Georgia, serif" font-size="22">q(z|x) = N(μ, σ²)</text>
+      <path d="M186 44H241M186 58H229M186 72H250" stroke="#a596c5" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

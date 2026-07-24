@@ -7,15 +7,15 @@ const TICK = '`';
  * integration example, while this article demonstrates the rest of the card
  * system in a few immediately readable pages.
  */
-export const STARTER_MARKDOWN = String.raw`# Md2Card：让技术 Markdown 成为可发布的图片卡片
+export const STARTER_MARKDOWN = String.raw`# Md2Card：把 Markdown 笔记变成小红书图片
 
 > **纯前端、本地处理、预览即导出。** 这是一篇首次打开工作台就能完整阅读的产品演示：不需要上传文件，也不需要先授予图片目录权限。
 
-Md2Card 面向包含公式、表格、代码和多级标题的技术笔记。它不把文章机械截断，而是根据真实卡片尺寸重新组织阅读节奏；右侧预览看到的内容，就是之后导出的 PNG。
+Md2Card 适合日常 Markdown 笔记：学习总结、读书摘录、课程笔记、技术文章或知识整理都可以直接导入。它不把文章机械截断，而是根据真实卡片尺寸重新组织阅读节奏；右侧预览看到的内容，就是之后导出的 PNG。
 
 ## 01 · 从一篇 Markdown 开始
 
-你可以直接替换左侧内容、粘贴自己的笔记，或导入单篇 ${TICK}.md${TICK} 文件。默认的 **3:4 标准卡片 + 技术平衡密度 + 融合首卡** 已适合多数技术文章；遇到特殊内容时，再进入排版设置细调。
+你可以直接替换左侧内容、粘贴自己的笔记，或导入单篇 ${TICK}.md${TICK} 文件。默认的 **3:4 标准卡片 + 平衡密度 + 融合首卡** 已适合多数笔记；遇到特殊内容时，再进入排版设置细调。
 
 1. 输入或导入 Markdown；
 2. 先检查右侧自动分页；
@@ -26,13 +26,13 @@ Md2Card 面向包含公式、表格、代码和多级标题的技术笔记。它
 | --- | --- | --- |
 | 普通正文 | 保持稳定字号与阅读宽度 | 字号、行距、段间距 |
 | 标题层级 | 避免孤立停在页尾 | H2 / H3 / H4 安全区与段前距 |
-| 技术内容 | 不连带缩小整页正文 | 表格字号、公式缩放、代码字号 |
+| 复杂内容 | 不连带缩小整页正文 | 表格字号、公式缩放、代码字号 |
 
 <!-- md2card:break -->
 
 ## 02 · 公式应当自然融入叙述
 
-技术笔记里，中文说明、English terms、${TICK}inline_code()${TICK} 与行内公式常常同时出现。例如信噪比可以写作 $\mathrm{SNR}=10\log_{10}(P_s/P_n)$，而不应迫使整段文字为一条公式让步。
+有些 Markdown 笔记会同时出现中文说明、English terms、${TICK}inline_code()${TICK} 与行内公式。例如信噪比可以写作 $\mathrm{SNR}=10\log_{10}(P_s/P_n)$，而不应迫使整段文字为一条公式让步。
 
 对于独立公式，Md2Card 使用 KaTeX 渲染，并允许单独缩放：
 
@@ -45,7 +45,7 @@ x_t &= \sqrt{\bar\alpha_t}\,x_0 + \sqrt{1-\bar\alpha_t}\,\epsilon,\\
 \end{aligned}
 $$
 
-> 排版原则：公式太长时，先调整公式缩放或将表达式拆为多行；不要为了容纳一条技术内容而缩小普通正文。
+> 排版原则：公式太长时，先调整公式缩放或将表达式拆为多行；不要为了容纳一条复杂内容而缩小普通正文。
 
 <!-- md2card:break -->
 
