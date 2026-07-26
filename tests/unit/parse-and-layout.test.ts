@@ -37,6 +37,17 @@ describe('技术 Markdown 解析', () => {
     expect(article.blocks.some((block) => block.kind === 'pageBreak')).toBe(true);
   });
 
+  it('解析紧接后文的粗体，避免中文笔记中显示裸露的 ** 标记', () => {
+    const article = parseMarkdown('**答：是。**它们进入同一个 Transformer。');
+    expect(article.blocks[0]).toMatchObject({
+      kind: 'paragraph',
+      children: [
+        { kind: 'strong', children: [{ kind: 'text', value: '答：是。' }] },
+        { kind: 'text', value: '它们进入同一个 Transformer。' },
+      ],
+    });
+  });
+
   it('不把 GFM 表格的分隔线当成分页，并遵守显式分页', () => {
     const article = parseMarkdown(fixture);
     const plan = createPagePlan(article, DEFAULT_CONFIG, {});
@@ -76,7 +87,7 @@ describe('技术 Markdown 解析', () => {
 
   it('项目自带完整样例覆盖图片、公式、表格、代码和显式分页', () => {
     const article = parseMarkdown(completeExample);
-    expect(article.title).toContain('Md2Card 排版展示');
+    expect(article.title).toBe('Md2Card Example');
     expect(article.blocks.filter((block) => block.kind === 'image')).toHaveLength(3);
     expect(article.blocks.some((block) => block.kind === 'math')).toBe(true);
     expect(article.blocks.some((block) => block.kind === 'table')).toBe(true);

@@ -1,6 +1,6 @@
 # 示例文章
 
-这是一篇可以直接导入 Md2Card 的完整 Markdown 排版样例。它以扩散模型为线索，让标题、正文、图片、公式、表格与代码自然穿插，适合用来感受连续卡片的阅读节奏。
+这是一个可以直接导入 Md2Card 的完整 Markdown 样例，用于体验“把平常写好的笔记整理成小红书图片”的完整流程。它以扩散模型为线索，让标题、正文、图片、公式、表格与代码自然穿插，适合用来感受连续卡片的阅读节奏。
 
 工作台首次打开时也有一份不含本地图片的演示稿；本目录的文章则附带三张 SVG 插图，适合体验本地图片的自动匹配与图文排版。
 
@@ -8,7 +8,7 @@
 
 | 文件 | 用途 |
 | --- | --- |
-| [`Md2Card Example.md`](./Md2Card%20Example.md) | 一篇带图片、公式、表格、代码、列表与分页的完整 Markdown 样例 |
+| [`Md2Card Example.md`](./Md2Card%20Example.md) | 一篇带图片、公式、表格、代码、列表与分页的 Markdown 转小红书图片样例 |
 | `images/architecture.svg` | Markdown 笔记的结构关系插图 |
 | `images/sampling-pipeline.svg` | 从采样到去噪的流程插图 |
 | `images/wide-matrix.svg` | 宽幅注意力矩阵示意图 |

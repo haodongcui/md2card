@@ -20,6 +20,16 @@ type MdNode = {
 
 const processor = unified().use(remarkParse).use(remarkGfm).use(remarkMath);
 
+// remark follows CommonMark's delimiter rules: `**重点**后文` is treated as
+// literal text when the closing marker is immediately followed by a letter or
+// number. This is especially easy to write in Chinese notes. Insert a parsing
+// sentinel only for that pattern, then remove it again when creating inlines.
+const ADJACENT_STRONG_DELIMITER = /(\*\*(?:[^*\n]|\*(?!\*))*\*\*)(?=[\p{L}\p{N}_])/gu;
+
+function normalizeAdjacentStrongDelimiters(text: string): string {
+  return text.replace(ADJACENT_STRONG_DELIMITER, '$1&#8203;');
+}
+
 /**
  * remark-math understands $...$ / $$...$$. The two sample notes also use
  * \[...\] and \(...\), so normalize only outside fenced and inline code.
@@ -40,7 +50,10 @@ function normalizeMathDelimiters(markdown: string): string {
       // Inline code is intentionally left untouched.
       return line
         .split(/(`[^`]*`)/g)
-        .map((part) => (part.startsWith('`') ? part : part.replace(/\\\((.+?)\\\)/g, '$$$1$')))
+        .map((part) => {
+          if (part.startsWith('`')) return part;
+          return normalizeAdjacentStrongDelimiters(part.replace(/\\\((.+?)\\\)/g, '$$$1$'));
+        })
         .join('');
     })
     .join('\n');
@@ -57,7 +70,7 @@ function toInline(nodes: MdNode[] | undefined): Inline[] {
   return nodes.flatMap((node): Inline[] => {
     switch (node.type) {
       case 'text':
-        return [{ kind: 'text', value: node.value ?? '' }];
+        return [{ kind: 'text', value: (node.value ?? '').replace(/\u200b/g, '') }];
       case 'strong':
         return [{ kind: 'strong', children: toInline(node.children) }];
       case 'emphasis':
